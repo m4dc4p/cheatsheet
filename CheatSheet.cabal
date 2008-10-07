@@ -1,0 +1,22 @@
+Name:           CheatSheet
+Version:        1.0
+License:        BSD3
+Author:         Justin Bailey
+Homepage:       
+Maintainer:     jgbailey _ codeslower _ com
+Category:       Help
+Build-Depends:  base, containers, directory
+Build-type: Simple
+Synopsis:       A Haskell cheat sheet in PDF and literate formats.
+Description:
+  This module includes a PDF giving a synopsis of Haskell syntax, keywords,
+  and other essentials. It also has a literate source file which allows all
+  examples to be inspected.
+Exposed-modules: CheatSheet
+Hs-Source-Dirs: .
+Data-files: CheatSheet.pdf
+
+Executable: cheatsheet
+Main-Is: Main.lhs
+Hs-Source-Dirs: .
+
