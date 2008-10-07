@@ -1,0 +1,8 @@
+Haskell CheatSheet
+==================
+
+Written and maintained by Justin Bailey <jgbailey@codeslower.com>.
+
+The cheat sheet is a PDF included in the source distribution. If you installed
+this package through cabal install, run "cheatsheet.exe" to find where the
+PDF was installed.
