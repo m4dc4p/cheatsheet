@@ -2,7 +2,7 @@ Name:           CheatSheet
 Version:        1.0
 License:        BSD3
 Author:         Justin Bailey
-Homepage:       
+Homepage:       http://github.com/m4dc4p/cheatsheet
 Maintainer:     jgbailey _ codeslower _ com
 Category:       Help
 Build-Depends:  base, containers, directory
