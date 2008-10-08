@@ -12,12 +12,11 @@ Synopsis:       A Haskell cheat sheet in PDF and literate formats.
 Description:
   This module includes a PDF giving a synopsis of Haskell syntax, keywords,
   and other essentials. It also has a literate source file which allows all
-  examples to be inspected.
-Exposed-modules: CheatSheet
-Hs-Source-Dirs: .
-Data-files: CheatSheet.pdf
+  examples to be inspected. Download and unpack this archive to view them.
+Data-files: CheatSheet.pdf, CheatSheet.lhs
+Extra-Source-Files: CheatSheet.lhs, README
 
 Executable: cheatsheet
 Main-Is: Main.lhs
-Hs-Source-Dirs: .
+Hs-Source-Dirs: . 
 
