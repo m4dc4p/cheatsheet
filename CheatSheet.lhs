@@ -115,7 +115,9 @@ the source into your favorite interpreter to play with code samples shown.
   @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
 
 \shd{``Layout'' rule, braces and semi-colons.}
-  Haskell makes use of ``layout'' rules using spaces for indendation, but can optionally be written using braces and semi-colons, just like C.  The general rule is -- always indent. When the compiler complains, indent more.
+ Haskell can be written using braces and semi-colons, just like C. However, no one
+ does. Instead, the ``layout'' rule is used, where spaces represent scope. The general rule is -- always indent. When the compiler
+ complains, indent more.
 
   \sshd{Braces and semi-colons}
   Semi-colons terminate an expression, and braces represent scope:
@@ -777,8 +779,11 @@ the source into your favorite interpreter to play with code samples shown.
   
 \shd{Type}
 
-  This keyword defines a \emph{type synonym} (i.e., alias).  This keyword does not define a new type, like @data@ or @newtype@.  It is useful for documenting code but otherwise has no effect on the actual type of a given function or value. For example,
-  a @Person@ data type could be defined as:
+  This keyword defines a \emph{type synonym} (i.e., alias).  This
+  keyword does not define a new type, like @data@ or @newtype@.  It is
+  useful for documenting code but otherwise has no effect on the
+  actual type of a given function or value. For example, a @Person@
+  data type could be defined as:
 
 <  data Person = Person String String
 
