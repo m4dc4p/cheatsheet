@@ -1346,5 +1346,9 @@ the source into your favorite interpreter to play with code samples shown.
   @()@ -- ``unit'' type and ``unit'' value. The value and type that represents no
   useful information.
 
+\hd{Contributors}
+
+  My thanks to those who contributed patches and useful suggestions: Jeff Zaroyko.
+
 \end{multicols}
 \end{document}
