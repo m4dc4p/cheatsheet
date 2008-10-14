@@ -1351,7 +1351,7 @@ the source into your favorite interpreter to play with code samples shown.
 \hd{Contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Holger Siegel, and Jeff Zaroyko.
+  Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, and Jeff Zaroyko.
 
 \hd{Version}
 
