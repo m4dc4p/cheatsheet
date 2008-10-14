@@ -64,7 +64,7 @@ the source into your favorite interpreter to play with code samples shown.
 < case, class, data, deriving, do,
 < else, if, import, in, infix, infixl,
 < infixr, instance, let, of, module,
-< newtype, return, then, type, where
+< newtype, then, type, where
 
 \shd{Strings}
   @"abc"@ -- Unicode string.\\
@@ -1351,14 +1351,14 @@ the source into your favorite interpreter to play with code samples shown.
 \hd{Contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Jeff Zaroyko, Stephen Hicks, Holger Siegel, Adrian Neumann.
+  Jeff Zaroyko, Stephen Hicks, Kurt Hutchinson, Holger Siegel, and Adrian Neumann.
 
 \hd{Version}
 
-  This is version 1.1 of the CheatSheet. The latest source can always
+  This is version 1.2. The source can 
   be found at \url{git://github.com/m4dc4p/cheatsheet.git}. The latest
-  version be downloaded from
-  HackageDB\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
+  released version of the PDF can be downloaded from
+  Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
   \url{http://blog.codeslower.com} for other projects and writings. 
 
 \end{multicols}
