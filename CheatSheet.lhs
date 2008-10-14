@@ -101,7 +101,8 @@ the source into your favorite interpreter to play with code samples shown.
   @1.0, 1e10@ - Floating point\\
   @[1..10]@ -- List of numbers -- $1, 2, ... 10$\\
   @[100..]@ -- Infinite list of numbers -- $100, 101, 102, ... $\\
-  @[110..100]@ -- Empty list; ranges do not go backwards.\\
+  @[110..100]@ -- Empty list; ranges only go forwards.\\
+  @[0, -1 ..]@ -- Negative integers.\\
   @[-100..-110]@ -- Syntax error; need [-100.. -110] for negatives.\\
   @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
 
@@ -115,9 +116,9 @@ the source into your favorite interpreter to play with code samples shown.
   @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
 
 \shd{``Layout'' rule, braces and semi-colons.}
-  Haskell can be written using braces and semi-colons, just like C. However, no one
-  does. Instead, the ``layout'' rules is used. The general rule is -- always indent. When the compiler
-  complains, indent more.
+ Haskell can be written using braces and semi-colons, just like C. However, no one
+ does. Instead, the ``layout'' rule is used, where spaces represent scope. The general rule is -- always indent. When the compiler
+ complains, indent more.
 
   \sshd{Braces and semi-colons}
   Semi-colons terminate an expression, and braces represent scope:
@@ -143,7 +144,7 @@ the source into your favorite interpreter to play with code samples shown.
 
   \sshd{Let}
   Indent the body of the let at least one space from the first definition
-  in the @let@. If @let@ appears on its own line, the first definition must
+  in the @let@. If @let@ appears on its own line, the body of any defintion must
   appear in the column after the let:
 
 <  square x =
@@ -151,8 +152,9 @@ the source into your favorite interpreter to play with code samples shown.
 <          x * x
 <    in x2
 
-  As can be seen above, the @in@ keyword must also be in the same column
-  as @let@.
+  As can be seen above, the @in@ keyword must also be in the same
+  column as @let@. Finally, when multiple defintions are given, all
+  identifiers must appear in the same column.
   
 \hd{Keywords}
 
@@ -210,7 +212,7 @@ the source into your favorite interpreter to play with code samples shown.
   \sshd{Matching Order}
   Matching proceeds from top to bottom. If we re-wrote @anyChoice1@ as
   below, we'll never know what choice was actually given
-  because the first pattern will always match:
+  because the first pattern will always succeed:
 
 > anyChoice3 ch =
 >   case ch of
@@ -430,7 +432,7 @@ the source into your favorite interpreter to play with code samples shown.
 
   The @if@ statement has this ``signature'':
 
-< if-then-else :: Bool -> a -> a
+< if-then-else :: Bool -> a -> a -> a 
 
   That is, it takes a @Bool@ value and evaluates to some other value based on
   the condition. From the type signatures it is clear that @doesFileExist@ cannot
@@ -442,7 +444,7 @@ the source into your favorite interpreter to play with code samples shown.
 <     else ...
 
   That is, @doesFileExist@ results in an @IO Bool@ value, while @if@ wants
-  a @Bool@ value. Instead, the correct value must be ``extracted'':
+  a @Bool@ value. Instead, the correct value must be ``extracted'' by running the IO action:
 
 > right1 fileName = do
 >   exists <- doesFileExist fileName
@@ -779,10 +781,11 @@ the source into your favorite interpreter to play with code samples shown.
   
 \shd{Type}
 
-  This keyword does not define a new type, like @data@ or @newtype@. Instead, it
-  defines a \emph{type synonym} (i.e., alias). It is useful for documenting code but
-  otherwise has no effect on the actual type of a given function or value. For example,
-  a @Person@ data type could be defined as:
+  This keyword defines a \emph{type synonym} (i.e., alias).  This
+  keyword does not define a new type, like @data@ or @newtype@.  It is
+  useful for documenting code but otherwise has no effect on the
+  actual type of a given function or value. For example, a @Person@
+  data type could be defined as:
 
 <  data Person = Person String String
 
@@ -1344,6 +1347,19 @@ the source into your favorite interpreter to play with code samples shown.
 \shd{Unit}
   @()@ -- ``unit'' type and ``unit'' value. The value and type that represents no
   useful information.
+
+\hd{Contributors}
+
+  My thanks to those who contributed patches and useful suggestions:
+  Jeff Zaroyko, Stephen Hicks, Holger Siegel, Adrian Neumann.
+
+\hd{Version}
+
+  This is version 1.1 of the CheatSheet. The latest source can always
+  be found at \url{git://github.com/m4dc4p/cheatsheet.git}. The latest
+  version be downloaded from
+  HackageDB\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
+  \url{http://blog.codeslower.com} for other projects and writings. 
 
 \end{multicols}
 \end{document}
