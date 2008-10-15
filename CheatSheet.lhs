@@ -21,13 +21,11 @@
 \begin{document}
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}
-This cheat sheet attempts to lay out the fundamental elements of the Haskell
-language and libraries. It should serve as a reference to both those learning
-Haskell and those who are familiar with it, but maybe can't remember all
-the varieties of syntax and functionality.
 
-It is presented as both an executable Haskell file and a printable document. Load
-the source into your favorite interpreter to play with code samples shown.
+This cheat sheet lays out the fundamental elements of the Haskell language:
+syntax, keywords and other elements. It is presented as both an executable
+Haskell file and a printable document. Load the source into your favorite
+interpreter to play with code samples shown.
 
 \begin{comment}
 
@@ -35,7 +33,7 @@ the source into your favorite interpreter to play with code samples shown.
 >
 > module CheatSheet where
 >
-> import Data.Char (isUpper, isLower, toUpper, toLower, isSpace)
+> import Data.Char (isUpper, isLower, toUpper, toLower, isSpace, GeneralCategory(..))
 > import System.IO (readFile)
 > import System.Directory (doesFileExist)
 > import qualified Data.Set as Set
@@ -98,13 +96,22 @@ the source into your favorite interpreter to play with code samples shown.
 
 \shd{Numbers}
   @1@ - Integer\\
-  @1.0, 1e10@ - Floating point\\
-  @[1..10]@ -- List of numbers -- $1, 2, ... 10$\\
-  @[100..]@ -- Infinite list of numbers -- $100, 101, 102, ... $\\
+  @1.0, 1e10@ - Floating point
+
+\shd{Enumerations} 
+  @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
+  @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.\\
   @[110..100]@ -- Empty list; ranges only go forwards.\\
   @[0, -1 ..]@ -- Negative integers.\\
-  @[-100..-110]@ -- Syntax error; need [-100.. -110] for negatives.\\
-  @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
+  @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.\\
+  @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.\\
+
+  \noindent In fact, any value which is in the @Enum@ class can be used. E.g.,:
+  
+\smallskip\noindent
+  @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.\\
+  @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.\\
+  @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
 
 \shd{Lists \& Tuples}
   @[]@ -- Empty list.\\
@@ -1355,11 +1362,11 @@ the source into your favorite interpreter to play with code samples shown.
 
 \hd{Version}
 
-  This is version 1.2. The source can 
-  be found at \url{git://github.com/m4dc4p/cheatsheet.git}. The latest
+  This is version 1.3. The source can 
+  be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
-  \url{http://blog.codeslower.com} for other projects and writings. 
+  CodeSlower.com\footnote{\url{http://blog.codeslower.com}} for other projects and writings. 
 
 \end{multicols}
 \end{document}
