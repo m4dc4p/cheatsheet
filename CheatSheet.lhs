@@ -128,11 +128,20 @@ interpreter to play with code samples shown.
  complains, indent more.
 
   \sshd{Braces and semi-colons}
-  Semi-colons terminate an expression, and braces represent scope:
+  Semi-colons terminate an expression, and braces represent
+  scope. They can be used after several keywords: @where@, @let@, @do@
+  and @of@. They cannot be used when defining a function body. For 
+  example, the below will not compile.
 
 <
-<    square x = { x * x; }
+<    square2 x = { x * x; }
 <
+
+  However, this will work fine:                    
+
+>
+> square2 x = result
+>     where { result = x * x; }
 
   \sshd{Function Definition}
   Indent the body at least one space from the function name:
@@ -194,7 +203,7 @@ interpreter to play with code samples shown.
   and matches any value.
 
   \sshd{Nesting \& Capture}
-  Nested matching and argument capture are also allowed. Recalling the definition of @Maybe@ above,
+  Nested matching and argument capture are also allowed. Referring to the definition of @Maybe@ below,
   we can determine if any choice was given using a nested match:
 
 > anyChoice1 ch =
@@ -1357,12 +1366,12 @@ interpreter to play with code samples shown.
 
 \hd{Contributors}
 
-  My thanks to those who contributed patches and useful suggestions:
+  My thanks to those who contributed patches and useful suggestions: Cale Gibbard,
   Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, and Jeff Zaroyko.
 
 \hd{Version}
 
-  This is version 1.3. The source can 
+  This is version 1.4. The source can 
   be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
