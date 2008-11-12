@@ -1367,7 +1367,7 @@ interpreter to play with code samples shown.
 \hd{Contributors}
 
   My thanks to those who contributed patches and useful suggestions: Cale Gibbard,
-  Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, and Jeff Zaroyko.
+  Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}
 
