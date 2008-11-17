@@ -160,7 +160,7 @@ interpreter to play with code samples shown.
 
   \sshd{Let}
   Indent the body of the let at least one space from the first definition
-  in the @let@. If @let@ appears on its own line, the body of any defintion must
+  in the @let@. If @let@ appears on its own line, the body of any definition must
   appear in the column after the let:
 
 <  square x =
@@ -169,7 +169,7 @@ interpreter to play with code samples shown.
 <    in x2
 
   As can be seen above, the @in@ keyword must also be in the same
-  column as @let@. Finally, when multiple defintions are given, all
+  column as @let@. Finally, when multiple definitions are given, all
   identifiers must appear in the same column.
   
 \hd{Keywords}
@@ -258,7 +258,7 @@ interpreter to play with code samples shown.
   type of its arguments. Haskell accomplishes overloading through @class@ and
   @instance@ declarations. A @class@ defines one or more functions that can be
   applied to any types which are members (i.e., instances) of that class. A
-  class is analagous to an interface in Java or C#, and instances to a concrete
+  class is analogous to an interface in Java or C#, and instances to a concrete
   implementation of the interface.
 
   A class must be declared with one or more type variables. Technically, Haskell
@@ -360,7 +360,7 @@ interpreter to play with code samples shown.
 > data Slot1 a = Slot1 a | Empty1
 
   This declares a type @Slot1@ with two constructors, @Slot1@ and @Empty1@. The @Slot1@ constructor
-  can take an argument of \emph{any} type, which is reprented by the type variable @a@ above.
+  can take an argument of \emph{any} type, which is represented by the type variable @a@ above.
 
   We can also mix type variables and specific types in constructors:
 
@@ -409,7 +409,7 @@ interpreter to play with code samples shown.
   types are those in the @Num@ class.
 
   \sshd{Deriving}
-  Many types have common operations which are tediuos to define yet very necessary, such
+  Many types have common operations which are tedious to define yet very necessary, such
   as the ability to convert to and from strings, compare for equality, or order in a sequence. These
   capabilities are defined as typeclasses in Haskell.
 
@@ -829,7 +829,7 @@ interpreter to play with code samples shown.
 
   Because @type@ is just a synonym, it can't declare multiple constructors like @data@
   can. Type variables can be used, but there cannot be more than the type variables declared with the
-  original type. That means a synonmym like the following is possible:
+  original type. That means a synonym like the following is possible:
 
 < type NotSure a = Maybe a
 
@@ -945,7 +945,7 @@ interpreter to play with code samples shown.
 >   | even n = "even!"
 >   | otherwise = "odd!"
 
-    Notice @otherwise@ -- it always evaulates to true and can be used to specify
+    Notice @otherwise@ -- it always evaluates to true and can be used to specify
     a ``default'' branch.
 
     Guards can be used with patterns. Here is a function that determines if the
@@ -958,7 +958,7 @@ interpreter to play with code samples shown.
 >   | otherwise = "not a letter!"
 
   \sshd{Matching \& Guard Order}
-  Pattern-matching proceeds in top to bottom order. Similary, guard expressions
+  Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
   are tested from top to bottom. For example, neither of these functions would
   be very interesting:
 
@@ -1117,7 +1117,7 @@ interpreter to play with code samples shown.
 < Curry, Haskell
 
   Of course, full pattern matching, guards, etc. are available in this form. Type signatures are a
-  bit different, though. The operator ``name'' must appear in parenetheses:
+  bit different, though. The operator ``name'' must appear in parentheses:
 
 > (##) :: String -> String -> String
 
@@ -1158,7 +1158,7 @@ interpreter to play with code samples shown.
 < > 2 `plus1` 3 `mult1` 5
 < 25
 
-  Reversing associativy also has interesting effects. Redefining division
+  Reversing associativity also has interesting effects. Redefining division
   as right associative:
 
 > infixr 7 `div1`
@@ -1322,7 +1322,7 @@ interpreter to play with code samples shown.
 < negateAll :: Num a => [a] -> [a]
 
   However, for efficiency or other reasons you may only want to allow @Int@ types. You would accomplish
-  that wiht a type signature:
+  that with a type signature:
 
 < negateAll :: [Int] -> [Int]
   \end{description}
@@ -1366,12 +1366,12 @@ interpreter to play with code samples shown.
 
 \hd{Contributors}
 
-  My thanks to those who contributed patches and useful suggestions: Cale Gibbard,
+  My thanks to those who contributed patches and useful suggestions: Dave Bayer, Cale Gibbard,
   Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}
 
-  This is version 1.4. The source can 
+  This is version 1.5. The source can 
   be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
