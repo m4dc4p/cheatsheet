@@ -11,7 +11,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\lfoot{\copyright\ 2008 Justin Bailey.}
+\lfoot{\copyright\ 2009 Justin Bailey.}
 \cfoot{\thepage}
 \rfoot{\url{jgbailey@@codeslower.com}}
 \renewcommand\footrulewidth{0.4pt}
@@ -1058,10 +1058,10 @@ interpreter to play with code samples shown.
 
 \shd{List Comprehensions}
 
-  A list comprehension consists of three types of elements - \emph{generators},
-  \emph{guards}, and \emph{targets}. A list comprehension creates a list of
-  target values based on the generators and guards given. This comprehension
-  generates all squares:
+  A list comprehension consists of four types of elements - \emph{generators},
+  \emph{guards}, \emph{local bindings}, and \emph{targets}. A list
+  comprehension creates a list of target values based on the generators
+  and guards given. This comprehension generates all squares:
   
 > squares = [x * x | x <- [1..]]
 
@@ -1076,6 +1076,16 @@ interpreter to play with code samples shown.
 > divisors n =
 >   [d | d <- [1..(n `div` 2)]
 >      , n `mod` d == 0]
+
+  Local bindings provide new definitions for use in the generated expression
+  or subsequent generators and guards. Below, @z@ is used to represent
+  the minimum of @a@ and @b@:
+
+> strange = [(a,z) | a <-[1..3]
+>                  , b <-[1..3]
+>                  , c <- [1..3]
+>                  , let z = min a b
+>                  , z < c ]
 
   Comprehensions are not limited to numbers. Any list will do. All upper
   case letters can be generated:
@@ -1366,12 +1376,14 @@ interpreter to play with code samples shown.
 
 \hd{Contributors}
 
-  My thanks to those who contributed patches and useful suggestions: Dave Bayer, Cale Gibbard,
-  Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Markus Roberts, Holger Siegel, Leif Warner, and Jeff Zaroyko.
+  My thanks to those who contributed patches and useful suggestions:
+  Dave Bayer, Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Adrian
+  Neumann, Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner,
+  and Jeff Zaroyko.
 
 \hd{Version}
 
-  This is version 1.5. The source can 
+  This is version 1.6. The source can 
   be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit

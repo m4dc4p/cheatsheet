@@ -1,0 +1,10 @@
+dist
+*.manifest
+*.hi
+*.o
+*.aux
+*.dvi
+*.tex
+*.pdf
+*.log
+*.exe
