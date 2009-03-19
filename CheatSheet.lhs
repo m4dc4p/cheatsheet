@@ -258,7 +258,7 @@ interpreter to play with code samples shown.
   type of its arguments. Haskell accomplishes overloading through @class@ and
   @instance@ declarations. A @class@ defines one or more functions that can be
   applied to any types which are members (i.e., instances) of that class. A
-  class is analogous to an interface in Java or C#, and instances to a concrete
+  class is analogous to an interface in Java or C\#, and instances to a concrete
   implementation of the interface.
 
   A class must be declared with one or more type variables. Technically, Haskell
@@ -1137,7 +1137,7 @@ interpreter to play with code samples shown.
 
   However, there are several ``operators'' which cannot be redefined. Those are:
   
-\textt{<- -> =} (\emph{by itself})  
+\texttt{<- -> =} (\emph{by itself})  
 
   \sshd{Precedence \& Associativity}
   The precedence and associativity, collectively called \emph{fixity}, of any
