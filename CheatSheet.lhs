@@ -68,8 +68,10 @@ interpreter to play with code samples shown.
 
 \shd{Strings}\label{strings}
 
-  @"abc"@ -- Unicode string.\\
-  @'a'@ -- Single character.
+  \begin{itemize}
+  \item @"abc"@ -- Unicode string.
+  \item @'a'@ -- Single character.
+  \end{itemize}
 
   \sshd{Multi-line Strings}\label{multi-line-strings}
   Normally, it is syntax error if a string has any actual new line characters.
@@ -100,34 +102,41 @@ interpreter to play with code samples shown.
 
 \shd{Numbers}\label{numbers}
 
-  @1@ -- Integer\\
-  @1.0, 1e10@ -- Floating point
+  \begin{itemize}
+  \item @1@ -- Integer
+  \item @1.0, 1e10@ -- Floating point
+  \end{itemize}
 
 \shd{Enumerations}\label{enumerations}
 
-  @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
-  @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.\\
-  @[110..100]@ -- Empty list; ranges only go forwards.\\
-  @[0, -1 ..]@ -- Negative integers.\\
-  @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.\\
-  @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.\\
+  \begin{itemize}
+  \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
+  \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
+  \item @[110..100]@ -- Empty list; ranges only go forwards.
+  \item @[0, -1 ..]@ -- Negative integers.
+  \item @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.
+  \item @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
+  \end{itemize}
 
   \noindent In fact, any value which is in the @Enum@ class can be used. E.g.,:
 
-\smallskip\noindent
-  @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.\\
-  @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.\\
-  @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
+  \begin{itemize}
+  \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
+  \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
+  \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
+  \end{itemize}
 
 \shd{Lists \& Tuples}\label{lists-tuples}
 
-  @[]@ -- Empty list.\\
-  @[1,2,3]@ -- List of three numbers.\\
-  @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).\\
-  @"abc"@ -- List of three characters (strings are lists).\\
-  @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).\\
-  @(1,"a")@ -- 2-element tuple of a number and a string.\\
-  @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
+  \begin{itemize}
+  \item @[]@ -- Empty list.
+  \item @[1,2,3]@ -- List of three numbers.
+  \item @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).
+  \item @"abc"@ -- List of three characters (strings are lists).
+  \item @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).
+  \item @(1,"a")@ -- 2-element tuple of a number and a string.
+  \item @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
+  \end{itemize}
 
 \shd{``Layout'' rule, braces and semi-colons.}\label{layout}
 
