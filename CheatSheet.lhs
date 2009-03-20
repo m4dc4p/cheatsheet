@@ -1135,9 +1135,9 @@ interpreter to play with code samples shown.
 
 < # $ % & * + . / < = > ? @ \ ^ | - ~
 
-  However, there are several ``operators'' which cannot be redefined. Those are:
-  
-\texttt{<- -> =} (\emph{by itself})  
+  However, there are several ``operators'' which cannot be redefined. They are: @<-@, @->@ and @=@. The last,
+  @=@, cannot be redefined by itself, but can be used as part of multi-character operator. The ``bind'' function,
+  @>>=@, is one example.
 
   \sshd{Precedence \& Associativity}
   The precedence and associativity, collectively called \emph{fixity}, of any
