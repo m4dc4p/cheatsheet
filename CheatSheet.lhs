@@ -47,6 +47,7 @@ interpreter to play with code samples shown.
   Below the most basic syntax for Haskell is given.
 
 \shd{Comments}\label{comments}
+
   A single line comment starts with `@--@' and extends to the end of the line.
   Multi-line comments start with '@{-@' and extend to '@-}@'. Comments can be
   nested.
@@ -56,6 +57,7 @@ interpreter to play with code samples shown.
   documenting Haskell code.
 
 \shd{Reserved Words}\label{reserved-words}
+
   The following lists the reserved words defined by Haskell. It is a syntax
   error to give a variable or function one of these names.
 
@@ -65,6 +67,7 @@ interpreter to play with code samples shown.
 < newtype, then, type, where
 
 \shd{Strings}\label{strings}
+
   @"abc"@ -- Unicode string.\\
   @'a'@ -- Single character.
 
@@ -96,10 +99,12 @@ interpreter to play with code samples shown.
 < string.
 
 \shd{Numbers}\label{numbers}
+
   @1@ -- Integer\\
   @1.0, 1e10@ -- Floating point
 
 \shd{Enumerations}\label{enumerations}
+
   @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
   @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.\\
   @[110..100]@ -- Empty list; ranges only go forwards.\\
@@ -115,6 +120,7 @@ interpreter to play with code samples shown.
   @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
 
 \shd{Lists \& Tuples}\label{lists-tuples}
+
   @[]@ -- Empty list.\\
   @[1,2,3]@ -- List of three numbers.\\
   @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).\\
@@ -124,6 +130,7 @@ interpreter to play with code samples shown.
   @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
 
 \shd{``Layout'' rule, braces and semi-colons.}\label{layout}
+
  Haskell can be written using braces and semi-colons, just like C. However, no
  one does. Instead, the ``layout'' rule is used, where spaces represent scope.
  The general rule is -- always indent. When the compiler complains, indent more.
@@ -174,6 +181,7 @@ interpreter to play with code samples shown.
   Haskell keywords are listed below, in alphabetical order.
 
 \shd{Case}\label{case}
+
   @case@ is similar to a @switch@ statement in C\# or Java, but can take action
   based on any possible value for the type of the value being inspected.
   Consider a simple data type such as the following:
@@ -305,6 +313,7 @@ interpreter to play with code samples shown.
   always be implemented by any @instance@ declarations.
 
 \shd{Data}\label{data}
+
   So-called \emph{algebraic data types} can be declared as follows:
 
 > data MyType = MyValue1 | MyValue2
@@ -441,6 +450,7 @@ interpreter to play with code samples shown.
   page~\pageref{deriving}.
 
 \shd{Do}\label{do}
+
   The @do@ keyword indicates that the code to follow will be in a \emph{monadic}
   context. Statements are separated by newlines, assignment is indicated by
   @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
@@ -541,9 +551,11 @@ interpreter to play with code samples shown.
 >          ++ " bytes long."); }
 
 \shd{Export}
+
   See the section on @module@ on page~\pageref{module}.
 
 \shd{If, Then, Else}\label{if}
+
   Remember, @if@ always ``returns'' a value. It is an expression, not just a
   control flow statement. This function tests if the string given starts with a
   lower case letter and, if so, converts it to upper case:
@@ -574,6 +586,7 @@ interpreter to play with code samples shown.
   See the section on @class@ on page~\pageref{class}.
 
 \shd{Let}\label{let}
+
   Local functions can be defined within a function using @let@. @let@ is always
   followed by @in@. @in@ must appear in the same column as the @let@ keyword.
   Functions defined have access to all other functions and variables within the
@@ -624,6 +637,7 @@ interpreter to play with code samples shown.
   See the section on @case@ on page~\pageref{case}.
 
 \shd{Module}\label{module}
+
   A module is a compilation unit which exports functions, types, classes,
   instances, and other modules. A module can only be defined in one file, though
   its exports may come from multiple sources. To make a Haskell file a module,
@@ -879,6 +893,7 @@ interpreter to play with code samples shown.
   comprehensions, and other areas of the language.
 
 \shd{Function Definition}\label{function-definition}
+
   Functions are defined by declaring their name, any arguments, and an equals
   sign:
 
@@ -1379,7 +1394,6 @@ interpreter to play with code samples shown.
 >       | otherwise = y
 
   \sshd{Type Annotations}\label{type-annotations}
-
   Sometimes Haskell will not be able to determine what type you meant. The
   classic demonstration of this is the ``@show . read@'' problem:
 
@@ -1394,6 +1408,7 @@ interpreter to play with code samples shown.
   in-line with functions.
 
 \shd{Unit}\label{unit}
+
   @()@ -- ``unit'' type and ``unit'' value. The value and type that represents
   no useful information.
 
