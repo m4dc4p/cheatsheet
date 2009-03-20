@@ -45,7 +45,7 @@ interpreter to play with code samples shown.
 
 \hd{Syntax}
 
-  Below the most basic syntax for Haskell is given. 
+  Below the most basic syntax for Haskell is given.
 
 \shd{Comments}
   A single line comment starts with `@--@' and extends to the end of the line. Multi-line
@@ -98,7 +98,7 @@ interpreter to play with code samples shown.
   @1@ - Integer\\
   @1.0, 1e10@ - Floating point
 
-\shd{Enumerations} 
+\shd{Enumerations}
   @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
   @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.\\
   @[110..100]@ -- Empty list; ranges only go forwards.\\
@@ -107,7 +107,7 @@ interpreter to play with code samples shown.
   @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.\\
 
   \noindent In fact, any value which is in the @Enum@ class can be used. E.g.,:
-  
+
 \smallskip\noindent
   @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.\\
   @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.\\
@@ -130,14 +130,14 @@ interpreter to play with code samples shown.
   \sshd{Braces and semi-colons}
   Semi-colons terminate an expression, and braces represent
   scope. They can be used after several keywords: @where@, @let@, @do@
-  and @of@. They cannot be used when defining a function body. For 
+  and @of@. They cannot be used when defining a function body. For
   example, the below will not compile.
 
 <
 <    square2 x = { x * x; }
 <
 
-  However, this will work fine:                    
+  However, this will work fine:
 
 >
 > square2 x = result
@@ -171,11 +171,11 @@ interpreter to play with code samples shown.
   As can be seen above, the @in@ keyword must also be in the same
   column as @let@. Finally, when multiple definitions are given, all
   identifiers must appear in the same column.
-  
+
 \hd{Keywords}
 
   Haskell keywords are listed below, in alphabetical order.
-  
+
 \shd{Case}
   @case@ is similar to a @switch@ statement in C\# or Java, but can take action based on any possible value
   for the type of the value being inspected. Consider a simple data type such as
@@ -265,16 +265,16 @@ interpreter to play with code samples shown.
   98 only allows one type variable, but most implementations of Haskell support
   so-called \emph{multi-parameter type classes}, which allow more than one type
   variable.
-  
+
   We can define a class which supplies a flavor for a given type:
-  
+
 > class Flavor a where
 >   flavor :: a -> String
 
   Notice that the declaration only gives the type signature of the function -
   no implementation is given here (with some exceptions, see ``Defaults''
   below). Continuing, we can define several instances:
-  
+
 > instance Flavor Bool where
 >   flavor _ = "sweet"
 >
@@ -285,11 +285,11 @@ interpreter to play with code samples shown.
 
 < > flavor True
 < "sweet"
-  
+
   While @flavor 'x'@ gives:
-  
+
 < > flavor 'x'
-< "sour"  
+< "sour"
 
 \sshd{Defaults}
 
@@ -298,7 +298,7 @@ interpreter to play with code samples shown.
   the class. A default is defined by giving a body to one of the member
   functions. The canonical example is @Eq@, which can defined @/=@ (not equal)
   in terms of @==@. :
-  
+
 < class Eq a where
 <   (==) :: a -> a -> Bool
 <   (/=) :: a -> a -> Bool
@@ -448,7 +448,7 @@ interpreter to play with code samples shown.
 
   The @if@ statement has this ``signature'':
 
-< if-then-else :: Bool -> a -> a -> a 
+< if-then-else :: Bool -> a -> a -> a
 
   That is, it takes a @Bool@ value and evaluates to some other value based on
   the condition. From the type signatures it is clear that @doesFileExist@ cannot
@@ -534,7 +534,7 @@ interpreter to play with code samples shown.
 
 \shd{Export}
   See the section on @module@ below.
-  
+
 \shd{If, Then, Else}
   Remember, @if@ always ``returns'' a value. It is an expression, not
   just a control flow statement. This function tests if the string given
@@ -552,19 +552,19 @@ interpreter to play with code samples shown.
 \shd{Import}
 
   See the section on @module@ below.
-  
+
 \shd{In}
 
   See @let@.
 
 \shd{Infix, infixl and infixr}
-  
+
   See the section on operators below.
-  
+
 \shd{Instance}
 
   See the section on @class@ above.
-  
+
 \shd{Let}
   Local functions can be defined within a function using @let@. @let@ is always
   followed by @in@. @in@ must appear in the same column as the @let@ keyword. Functions defined
@@ -614,7 +614,7 @@ interpreter to play with code samples shown.
 \shd{Of}
 
   See the section on @case@ above.
-  
+
 \shd{Module}
   A module is a compilation unit which exports functions, types, classes,
   instances, and other modules. A module can only be defined in one file, though
@@ -794,7 +794,7 @@ interpreter to play with code samples shown.
 \shd{Return}
 
   See @do@ above.
-  
+
 \shd{Type}
 
   This keyword defines a \emph{type synonym} (i.e., alias).  This
@@ -908,7 +908,7 @@ interpreter to play with code samples shown.
 
 > toLowerStr [] = []
 > toLowerStr str = map toLower str
->   
+>
 
   In reality, @str@ is the same as @_@ in that it will match anything, except
   the value matched is also given a name.
@@ -1062,16 +1062,16 @@ interpreter to play with code samples shown.
   \emph{guards}, \emph{local bindings}, and \emph{targets}. A list
   comprehension creates a list of target values based on the generators
   and guards given. This comprehension generates all squares:
-  
+
 > squares = [x * x | x <- [1..]]
 
   @x <- [1..]@ generates a list of all @Integer@ values and puts them in @x@,
   one by one. @x * x@ creates each element of the list by multiplying @x@ by
   itself.
-  
+
   Guards allow certain elements to be excluded. The following shows how divisors
   for a given number (excluding itself) can be calculated. Notice how @d@ is
-  used in both the guard and target expression. 
+  used in both the guard and target expression.
 
 > divisors n =
 >   [d | d <- [1..(n `div` 2)]
@@ -1089,7 +1089,7 @@ interpreter to play with code samples shown.
 
   Comprehensions are not limited to numbers. Any list will do. All upper
   case letters can be generated:
-  
+
 > ups =
 >   [c | c <- [minBound .. maxBound]
 >      , isUpper c]
@@ -1102,7 +1102,7 @@ interpreter to play with code samples shown.
 >       , c == br]
 
   A unique feature of list comprehensions is that pattern matching failures
-  do not cause an error - they are just excluded from the resulting list. 
+  do not cause an error - they are just excluded from the resulting list.
 
 \shd{Operators}
 
@@ -1268,25 +1268,25 @@ interpreter to play with code samples shown.
   defined earlier, we can write a function that sets the @green@ field to zero easily:
 
 > noGreen1 (C r _ b) = C r 0 b
-  
+
   The above is a bit verbose and we can rewrite using record syntax. This kind
   of ``update'' only sets values for the
   field(s) specified and copies the rest:
-  
+
 > noGreen2 c = c { green = 0 }
 
   Above, we capture the @Color@ value in @c@ and return a new @Color@ value. That value happens
   to have the same value for @red@ and @blue@ as @c@ and it's @green@ component is 0.
   We can combine this with pattern matching to set the @green@ and @blue@ fields
   to equal the @red@ field:
-  
+
 > makeGrey c@(C { red = r }) =
 >   c { green = r, blue = r }
 
   Notice we must use argument capture (``|c@|'') to get the @Color@ value
   and pattern matching with record syntax (``|C { red = r}|'') to get the inner
   @red@ field.
-  
+
 \shd{Anonymous Functions}
 
   An anonymous function (i.e., a \emph{lambda expression} or \emph{lambda}
@@ -1383,11 +1383,11 @@ interpreter to play with code samples shown.
 
 \hd{Version}
 
-  This is version 1.7. The source can 
+  This is version 1.7. The source can
   be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
-  CodeSlower.com\footnote{\url{http://blog.codeslower.com}} for other projects and writings. 
+  CodeSlower.com\footnote{\url{http://blog.codeslower.com}} for other projects and writings.
 
 \end{multicols}
 \end{document}
