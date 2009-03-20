@@ -1378,12 +1378,12 @@ interpreter to play with code samples shown.
 
   My thanks to those who contributed patches and useful suggestions:
   Dave Bayer, Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Adrian
-  Neumann, Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner,
-  and Jeff Zaroyko.
+  Neumann, Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger
+  Siegel, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}
 
-  This is version 1.6. The source can 
+  This is version 1.7. The source can 
   be found at GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}. Visit
