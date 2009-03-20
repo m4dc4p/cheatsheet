@@ -39,8 +39,6 @@ interpreter to play with code samples shown.
 > import System.Directory (doesFileExist)
 > import qualified Data.Set as Set
 > import qualified Data.Char as Char
->
->
 
 \end{comment}
 
@@ -134,13 +132,10 @@ interpreter to play with code samples shown.
   and @of@. They cannot be used when defining a function body. For
   example, the below will not compile.
 
-<
 <    square2 x = { x * x; }
-<
 
   However, this will work fine:
 
->
 > square2 x = result
 >     where { result = x * x; }
 
@@ -712,7 +707,6 @@ interpreter to play with code samples shown.
 
 > allUpper str =
 >   all Char.isUpper str
->
 
   Except for the prefix specified, qualified imports support the same syntax
   as normal imports. The name imported can be limited in the same
@@ -852,7 +846,6 @@ interpreter to play with code samples shown.
 >   where result = "No string given!"
 > strlen f = result ++ " characters long!"
 >   where result = show (length f)
->
 
   \sshd{Where vs. Let}\label{where-vs-let} A @where@ clause can only be defined at the level of a function definition. Usually, that is
   identical to the scope of @let@ definition. The only difference is when guards are being used. The scope of the @where@
@@ -909,7 +902,6 @@ interpreter to play with code samples shown.
 
 > toLowerStr [] = []
 > toLowerStr str = map toLower str
->
 
   In reality, @str@ is the same as @_@ in that it will match anything, except
   the value matched is also given a name.
