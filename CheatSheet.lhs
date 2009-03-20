@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+%rubber: paper landscape
 %include lhs2TeX.fmt
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
