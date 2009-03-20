@@ -798,6 +798,8 @@ interpreter to play with code samples shown.
 > newtype Work = W String
 > data Phone = Phone Home Work
 
+% FIXME: lowerName function from above?
+
   As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
   just @String@ values. The typechecker treats them as entirely new types. That
   means our @lowerName@ function from above would not compile. The following
