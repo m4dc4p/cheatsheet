@@ -1433,10 +1433,10 @@ interpreter to play with code samples shown.
 \hd{Version}\label{version}
 
   This is version 1.7. The source can be found at
-  GitHub\footnote{\url{git://github.com/m4dc4p/cheatsheet.git}}. The latest
+  GitHub\footnote{\url{http://github.com/m4dc4p/cheatsheet}}. The latest
   released version of the PDF can be downloaded from
   Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}.
-  Visit CodeSlower.com\footnote{\url{http://blog.codeslower.com}} for other
+  Visit CodeSlower.com\footnote{\url{http://blog.codeslower.com/}} for other
   projects and writings.
 
 \end{multicols}
