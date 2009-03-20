@@ -95,8 +95,8 @@ interpreter to play with code samples shown.
 < string.
 
 \shd{Numbers}
-  @1@ - Integer\\
-  @1.0, 1e10@ - Floating point
+  @1@ -- Integer\\
+  @1.0, 1e10@ -- Floating point
 
 \shd{Enumerations}
   @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
@@ -271,7 +271,7 @@ interpreter to play with code samples shown.
 > class Flavor a where
 >   flavor :: a -> String
 
-  Notice that the declaration only gives the type signature of the function -
+  Notice that the declaration only gives the type signature of the function --
   no implementation is given here (with some exceptions, see ``Defaults''
   below). Continuing, we can define several instances:
 
@@ -470,7 +470,7 @@ interpreter to play with code samples shown.
 
   Notice the use of @return@, too. Because @do@ puts us ``inside'' the @IO@
   monad, we can't ``get out'' except through @return@. Note that we don't
-  have to use @if@ inline here - we can also use @let@ to evaluate the condition
+  have to use @if@ inline here -- we can also use @let@ to evaluate the condition
   and get a value first:
 
 > right2 fileName = do
@@ -1058,7 +1058,7 @@ interpreter to play with code samples shown.
 
 \shd{List Comprehensions}
 
-  A list comprehension consists of four types of elements - \emph{generators},
+  A list comprehension consists of four types of elements -- \emph{generators},
   \emph{guards}, \emph{local bindings}, and \emph{targets}. A list
   comprehension creates a list of target values based on the generators
   and guards given. This comprehension generates all squares:
@@ -1102,11 +1102,11 @@ interpreter to play with code samples shown.
 >       , c == br]
 
   A unique feature of list comprehensions is that pattern matching failures
-  do not cause an error - they are just excluded from the resulting list.
+  do not cause an error -- they are just excluded from the resulting list.
 
 \shd{Operators}
 
-  There are very few predefined ``operators'' in Haskell - most that do
+  There are very few predefined ``operators'' in Haskell -- most that do
   look predefined are actually syntax (e.g., ``@=@''). Instead, operators
   are simply functions that take two arguments and have special syntax support.
   Any so-called operator can be applied as a normal function using parentheses:
