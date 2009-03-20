@@ -1400,9 +1400,9 @@ interpreter to play with code samples shown.
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions: Dave Bayer,
-  Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Adrian Neumann, Barak
-  Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner, and
-  Jeff Zaroyko.
+  Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
+  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner,
+  and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
