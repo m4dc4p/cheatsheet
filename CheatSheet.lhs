@@ -213,7 +213,7 @@ interpreter to play with code samples shown.
 >     Just Second -> "Second!"
 >     _ -> "Something else."
 
-  We can use argument capture to display the value matched if we wish:%
+  We can use argument capture to display the value matched if we wish:
 
 > anyChoice2 ch =
 >   case ch of
