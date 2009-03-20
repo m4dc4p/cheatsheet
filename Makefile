@@ -1,26 +1,34 @@
 all: CheatSheet.dvi
 all: CheatSheet.pdf
 
-# To handle LaTeX rebuilds needed for refs, we use rubber.
-
-# Rubber is able to call lhs2TeX itself (just give the .lhs file as the
-# parameter), but as of this writing, it's hardcoded to call it with --poly.
-# Let's run lhs2TeX by ourselves for now.
+latexflags := -interaction=nonstopmode -file-line-error-style
+latex      := latex $(latexflags)
+pdflatex   := pdflatex $(latexflags)
 
 lhs2TeX := lhs2TeX --verb
-rubber  := rubber -s -W all
+dvips   := dvips
 
-CheatSheet.tex: CheatSheet.lhs
+define run-while-needed
+	@while true; do \
+	  printf '%s\n' '$(1) "$<"'; \
+	  $(1) "$<" >/dev/null; \
+	  if ! egrep -q 'LaTeX Warning:.*Rerun' "$(<:.tex=.log)"; then break; fi; \
+	done; \
+	egrep '\.tex:|Warning|Error' "$(<:.tex=.log)" >&2; \
+	! egrep -q Error "$(<:.tex=.log)"
+endef
+
+%.tex: %.lhs
 	$(lhs2TeX) "$<" >"$@"
 
-CheatSheet.dvi: CheatSheet.tex
-	$(rubber) "$<"
+%.dvi: %.tex
+	$(call run-while-needed,$(latex))
 
-CheatSheet.ps: CheatSheet.tex
-	$(rubber) --ps "$<"
+%.ps: %.dvi
+	$(dvips) "$<"
 
-CheatSheet.pdf: CheatSheet.tex
-	$(rubber) --pdf "$<"
+%.pdf: %.tex
+	$(call run-while-needed,$(pdflatex))
 
 .PHONY: clean
 clean:
