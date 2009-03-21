@@ -14,7 +14,7 @@ define run-while-needed
 	  $(1) "$<" >/dev/null; \
 	  if ! egrep -q 'LaTeX Warning:.*Rerun' "$(<:.tex=.log)"; then break; fi; \
 	done; \
-	egrep '\.tex:|Warning|Error' "$(<:.tex=.log)" >&2; \
+	egrep '\.tex:|Warning|Error' "$(<:.tex=.log)" >&2 || true; \
 	! egrep -q Error "$(<:.tex=.log)"
 endef
 
