@@ -59,8 +59,9 @@ interpreter to play with code samples shown.
   nested.
 
   Comments above function definitions should start with `@{- |@' and those next
-  to parameter types with `@-- ^@' for compatibility with Haddock, a system for
-  documenting Haskell code.
+  to parameter types with `@-- ^@' for compatibility with
+  Haddock\footnote{\url{http://haskell.org/haddock/}}, a system for documenting
+  Haskell code.
 
 \shd{Reserved Words}\label{reserved-words}
 
