@@ -25,6 +25,8 @@ define run-while-needed
 	! egrep -q Error "$(<:.tex=.log)"
 endef
 
+.NOTPARALLEL:
+
 %.tex: %.lhs
 	$(lhs2TeX) "$<" >"$@"
 
