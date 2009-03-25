@@ -18,6 +18,15 @@
 \newcommand{\hd}[1]{\section*{\textsf #1}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
 \newcommand{\sshd}[1]{\medskip\noindent{\bfseries\textsf #1}\hspace{\parindent}}
+\let\origitemize\itemize
+\let\endorigitemize\enditemize
+\renewenvironment{itemize}{
+  \begin{origitemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}{
+  \end{origitemize}
+}
 \begin{document}
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
