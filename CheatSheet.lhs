@@ -7,13 +7,15 @@
 \usepackage{multicol}
 \usepackage[landscape, top=0.2in, bottom=1in, left=0.2in, right=0.2in, dvips]{geometry}
 \usepackage{verbatim}
-\usepackage{url}
 \usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[all]{hypcap} % Must be after hyperref
+\hypersetup{colorlinks}
 \pagestyle{fancy}
 \fancyhf{}
 \lfoot{\copyright\ 2009 Justin Bailey.}
 \cfoot{\thepage}
-\rfoot{\url{jgbailey@@codeslower.com}}
+\rfoot{\href{mailto:jgbailey@@codeslower.com}{\tt jgbailey@@codeslower.com}}
 \renewcommand\footrulewidth{0.4pt}
 \newcommand{\hd}[1]{\section*{\textsf #1}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
@@ -245,9 +247,9 @@ interpreter to play with code samples shown.
   ``wildcard'' matching any value.
 
   \sshd{Nesting \& Capture}\label{nesting-capture}
-  Nested matching and binding are also allowed. Referring to the definition of
-  @Maybe@ on page~\pageref{maybe}, we can determine if any choice was given
-  using a nested match:
+  Nested matching and binding are also allowed. Referring to the
+  \hyperref[maybe]{definition of @Maybe@} on page~\pageref{maybe}, we can
+  determine if any choice was given using a nested match:
 
 > anyChoice1 ch =
 >   case ch of
@@ -314,8 +316,9 @@ interpreter to play with code samples shown.
 >   flavor :: a -> String
 
   Notice that the declaration only gives the type signature of the function---no
-  implementation is given here (with some exceptions, see ``Defaults'' on
-  page~\pageref{defaults}). Continuing, we can define several instances:
+  implementation is given here (with some exceptions, see
+  \hyperref[defaults]{``Defaults''} on page~\pageref{defaults}). Continuing, we
+  can define several instances:
 
 > instance Flavor Bool where
 >   flavor _ = "sweet"
@@ -479,7 +482,7 @@ interpreter to play with code samples shown.
 
 \shd{Deriving}
 
-  See the section on @deriving@ under the @data@ keyword on
+  See the section on \hyperref[deriving]{@deriving@} under the @data@ keyword on
   page~\pageref{deriving}.
 
 \shd{Do}\label{do}
@@ -585,7 +588,7 @@ interpreter to play with code samples shown.
 
 \shd{Export}
 
-  See the section on @module@ on page~\pageref{module}.
+  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
 
 \shd{If, Then, Else}\label{if}
 
@@ -604,19 +607,20 @@ interpreter to play with code samples shown.
 
 \shd{Import}
 
-  See the section on @module@ on page~\pageref{module}.
+  See the section on \hyperref[module]{@module@} on page~\pageref{module}.
 
 \shd{In}
 
-  See @let@ on page~\pageref{let}.
+  See \hyperref[let]{@let@} on page~\pageref{let}.
 
 \shd{Infix, infixl and infixr}
 
-  See the section on operators on page~\pageref{operators}.
+  See the section on \hyperref[operators]{operators} on
+  page~\pageref{operators}.
 
 \shd{Instance}
 
-  See the section on @class@ on page~\pageref{class}.
+  See the section on \hyperref[class]{@class@} on page~\pageref{class}.
 
 \shd{Let}\label{let}
 
@@ -668,7 +672,7 @@ interpreter to play with code samples shown.
 
 \shd{Of}
 
-  See the section on @case@ on page~\pageref{case}.
+  See the section on \hyperref[case]{@case@} on page~\pageref{case}.
 
 \shd{Module}\label{module}
 
@@ -855,7 +859,7 @@ interpreter to play with code samples shown.
 
 \shd{Return}
 
-  See @do@ on page~\pageref{do}.
+  See \hyperref[do]{@do@} on page~\pageref{do}.
 
 \shd{Type}\label{type}
 
