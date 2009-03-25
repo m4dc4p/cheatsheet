@@ -1,21 +1,36 @@
 all: CheatSheet.dvi
 all: CheatSheet.pdf
 
-TEXFLAGS += -interaction=nonstopmode
-TEXFLAGS += -file-line-error-style
+latexflags := -interaction=nonstopmode -file-line-error-style
+latex      := latex $(latexflags)
+pdflatex   := pdflatex $(latexflags)
 
-CheatSheet.tex: CheatSheet.lhs
-	lhs2TeX --verb $< > $@
+lhs2TeX := lhs2TeX --verb
+dvips   := dvips
 
-CheatSheet.dvi: CheatSheet.tex
-	latex $(TEXFLAGS) $<
+define run-while-needed
+	@while true; do \
+	  printf '%s\n' '$(1) "$<"'; \
+	  $(1) "$<" >/dev/null; \
+	  if ! egrep -q 'LaTeX Warning:.*Rerun' "$(<:.tex=.log)"; then break; fi; \
+	done; \
+	egrep '\.tex:|Warning|Error' "$(<:.tex=.log)" >&2 || true; \
+	! egrep -q Error "$(<:.tex=.log)"
+endef
 
-CheatSheet.ps: CheatSheet.dvi
-	dvips -o $@ $<
+%.tex: %.lhs
+	$(lhs2TeX) "$<" >"$@"
 
-CheatSheet.pdf: CheatSheet.tex
-	pdflatex $(TEXFLAGS) $<
+%.dvi: %.tex
+	$(call run-while-needed,$(latex))
 
+%.ps: %.dvi
+	$(dvips) "$<"
+
+%.pdf: %.tex
+	$(call run-while-needed,$(pdflatex))
+
+.PHONY: clean
 clean:
-	-rm -f CheatSheet.tex CheatSheet.aux CheatSheet.log
-	-rm -f CheatSheet.dvi CheatSheet.pdf CheatSheet.ps
+	$(RM) CheatSheet.tex CheatSheet.aux CheatSheet.log \
+	  CheatSheet.dvi CheatSheet.pdf CheatSheet.ps
