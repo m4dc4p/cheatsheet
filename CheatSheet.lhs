@@ -251,7 +251,7 @@ interpreter to play with code samples shown.
   Nested matching and binding are also allowed.
 
 \begin{figure}[H]
-% TODO: Change the background color or the border of this figure.
+\typeout{TODO: Change the background color or the border of this figure.}
 < data Maybe a = Just a | Nothing
 \caption{The definition of @Maybe@}\label{maybe}
 \end{figure}
@@ -834,7 +834,7 @@ interpreter to play with code samples shown.
 > newtype Work = W String
 > data Phone = Phone Home Work
 
-% FIXME: lowerName function from above?
+\typeout{FIXME: lowerName function from above?}
 
   As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
   just @String@ values. The typechecker treats them as entirely new types. That
