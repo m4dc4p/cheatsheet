@@ -18,9 +18,18 @@
 \cfoot{\thepage}
 \rfoot{\href{mailto:jgbailey@@codeslower.com}{\tt jgbailey@@codeslower.com}}
 \renewcommand\footrulewidth{0.4pt}
-\newcommand{\hd}[1]{\section*{\textsf #1}}
+
+\makeatletter
+% Copied from article.cls; second-to-last parameter changed to -\parindent.
+\renewcommand\subsubsection{\@@startsection{subsubsection}{3}{\z@@}%
+  {-3.25ex \@@plus -1ex \@@minus -.2ex}%
+  {-\parindent}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+\newcommand{\hd}[1]{\section*{\textsf{#1}}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
-\newcommand{\sshd}[1]{\medskip\noindent{\bfseries\textsf #1}\hspace{\parindent}}
+\newcommand{\sshd}[1]{\subsubsection*{\textsf{#1}}}
 \let\origitemize\itemize
 \let\endorigitemize\enditemize
 \renewenvironment{itemize}{
@@ -104,6 +113,7 @@ interpreter to play with code samples shown.
   \end{itemize}
 
   \sshd{Multi-line Strings}\label{multi-line-strings}
+
   Normally, it is a syntax error if a string has any actual newline characters.
   That is, this is a syntax error:
 
@@ -178,6 +188,7 @@ interpreter to play with code samples shown.
  The general rule is: always indent. When the compiler complains, indent more.
 
   \sshd{Braces and semi-colons}\label{braces-semicolons}
+
   Semi-colons terminate an expression, and braces represent scope. They can be
   used after several keywords: @where@, @let@, @do@ and @of@. They cannot be
   used when defining a function body. For example, the below will not compile.
@@ -190,6 +201,7 @@ interpreter to play with code samples shown.
 >     where { result = x * x; }
 
   \sshd{Function Definition}\label{layout-function-definition}
+
   Indent the body at least one space from the function name:
 
 < square x  =
@@ -205,6 +217,7 @@ interpreter to play with code samples shown.
 <      x * x
 
   \sshd{Let}\label{layout-let}
+
   Indent the body of the let at least one space from the first definition in the
   @let@. If @let@ appears on its own line, the body of any definition must
   appear in the column after the let:
@@ -248,6 +261,7 @@ interpreter to play with code samples shown.
   ``wildcard'' matching any value.
 
   \sshd{Nesting \& Capture}\label{nesting-capture}
+
   Nested matching and binding are also allowed.
 
 \begin{figure}[H]
@@ -278,6 +292,7 @@ interpreter to play with code samples shown.
 >     _ -> "Not first."
 
   \sshd{Matching Order}\label{case-matching-order}
+
   Matching proceeds from top to bottom. If @anyChoice1@ is reordered as follows,
   the first pattern will always succeed:
 
@@ -289,6 +304,7 @@ interpreter to play with code samples shown.
 >     Just Second -> "Second!"
 
   \sshd{Guards}\label{case-guards}
+
   Guards, or conditional matches, can be used in cases just like function
   definitions. The only difference is the use of the @->@ instead of @=@. Here
   is a simple function which does a case-insensitive string match:
@@ -344,6 +360,7 @@ interpreter to play with code samples shown.
 < "sour"
 
 \sshd{Defaults}\label{defaults}
+
   Default implementations can be given for functions in a class. These are
   useful when certain functions can be defined in terms of others in the class.
   A default is defined by giving a body to one of the member functions. The
@@ -375,6 +392,7 @@ interpreter to play with code samples shown.
   \emph{must} start with a capital letter. It is a syntax error otherwise.
 
   \sshd{Constructors with Arguments}\label{constructors-with-arguments}
+
   The type above is not very interesting except as an enumeration. Constructors
   that take arguments can be declared, allowing more information to be stored:
 
@@ -391,6 +409,7 @@ interpreter to play with code samples shown.
 > data Poly = Triangle Point Point Point
 
   \sshd{Type and Constructor Names}\label{type-punning}
+
   Type and constructor names can be the same, because they will never be used in
   a place that would cause confusion. For example:
 
@@ -405,6 +424,7 @@ interpreter to play with code samples shown.
   Some literature refers to this practice as \emph{type punning}.
 
   \sshd{Type Variables}\label{type-variables}
+
   Declaring so-called \emph{polymorphic} data types is as easy as adding type
   variables in the declaration:
 
@@ -422,6 +442,7 @@ interpreter to play with code samples shown.
   value.
 
   \sshd{Record Syntax}\label{record-syntax}
+
   Constructor arguments can be declared either positionally, as above, or using
   record syntax, which gives a name to each argument. For example, here we
   declare a @Contact@ type with names for appropriate arguments:
@@ -451,6 +472,7 @@ interpreter to play with code samples shown.
   argument capture and ``updating.''
 
   \sshd{Class Constraints}\label{class-constraints}
+
   Data types can be declared with class constraints on the type variables, but
   this practice is generally discouraged. It is generally better to hide the
   ``raw'' data constructors using the module system and instead export ``smart''
@@ -464,6 +486,7 @@ interpreter to play with code samples shown.
   types are those in the @Num@ class.
 
   \sshd{Deriving}\label{deriving}
+
   Many types have common operations which are tedious to define yet necessary,
   such as the ability to convert to and from strings, compare for equality, or
   order in a sequence. These capabilities are defined as typeclasses in Haskell.
@@ -499,6 +522,7 @@ interpreter to play with code samples shown.
   @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
 
   \sshd{If and IO}\label{if-io}
+
   @if@ can be tricky when used with IO. Conceptually it is no different from an
   @if@ in any other context, but intuitively it is hard to develop. Consider the
   function @doesFileExists@ from @System.Directory@:
@@ -545,6 +569,7 @@ interpreter to play with code samples shown.
   Instead we use it once at the end of the function.
 
   \sshd{Multiple @do@'s}\label{multiple-dos}
+
   When using @do@ with @if@ or @case@, another @do@ is required if either branch
   has multiple statements. An example with @if@:
 
@@ -657,6 +682,7 @@ interpreter to play with code samples shown.
 >      ", mid: " ++ show mid
 
   \sshd{Deconstruction}\label{deconstruction}
+
   The left-hand side of a @let@ definition can also destructure its argument, in
   case sub-components are to be accessed. This definition would extract the
   first three characters from a string
@@ -700,6 +726,7 @@ interpreter to play with code samples shown.
   place for your own module if you plan on releasing it to the public.
 
   \sshd{Imports}\label{imports}
+
   The Haskell standard libraries are divided into a number of modules. The
   functionality provided by those libraries is accessed by importing into your
   source file. To import all everything exported by a library, just use the
@@ -744,6 +771,7 @@ interpreter to play with code samples shown.
 < import Text.Read (Read())
 
   \sshd{Exclusions}\label{exclusions}
+
   If most, but not all, names are to be imported from a module, it would be
   tedious to list them all. For that reason, imports can also be specified via
   the @hiding@ keyword:
@@ -755,11 +783,13 @@ interpreter to play with code samples shown.
   be hidden.
 
   \sshd{Instance Declarations}\label{instance-declarations}
+
   It must be noted that @instance@ declarations \emph{cannot} be excluded from
   import: all @instance@ declarations in a module will be imported when the
   module is imported.
 
   \sshd{Qualified Imports}\label{qualified-imports}
+
   The names exported by a module (i.e., functions, types, operators, etc.) can
   have a prefix attached through qualified imports. This is particularly useful
   for modules which have a large number of functions having the same name as
@@ -787,6 +817,7 @@ interpreter to play with code samples shown.
   above.
 
   \sshd{Exports}\label{exports}
+
   If an export list is not provided, then all functions, types, constructors,
   etc. will be available to anyone importing the module. Note that any imported
   modules are \emph{not} exported in this case. Limiting the names exported is
@@ -951,6 +982,7 @@ interpreter to play with code samples shown.
   is a syntax error otherwise.
 
   \sshd{Pattern Matching}\label{pattern-matching}
+
   Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
   the values of arguments. Here, the the @agree@ function has four separate
   cases:
@@ -990,6 +1022,7 @@ interpreter to play with code samples shown.
   only difference is that the value matched is also given a name.
 
   \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
+
   This (sometimes controversial) pattern-matching facility makes it easy to match
   certain kinds of numeric expressions. The idea is to define a base case (the
   ``$n$'' portion) with a constant number for matching, and then to define other
@@ -1001,6 +1034,7 @@ interpreter to play with code samples shown.
 > isEven (n + 2) = isEven n
 
   \sshd{Argument Capture}\label{argument-capture}
+
   Argument capture is useful for pattern-matching a value \emph{and} using it,
   without declaring an extra variable. Use an `|@|' symbol in between the
   pattern to match and the variable to bind the value to. This facility is
@@ -1013,6 +1047,7 @@ interpreter to play with code samples shown.
 > len [] = "List is empty!"
 
   \sshd{Guards}\label{function-guards}
+
   Boolean functions can be used as ``guards'' in function definitions along with
   pattern matching. An example without pattern matching:
 
@@ -1034,6 +1069,7 @@ interpreter to play with code samples shown.
 >   | otherwise = "not a letter!"
 
   \sshd{Matching \& Guard Order}\label{function-matching-order}
+
   Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
   are tested from top to bottom. For example, neither of these functions would
   be very interesting:
@@ -1046,6 +1082,7 @@ interpreter to play with code samples shown.
 >   | n `div` 2 == 0 = True
 
   \sshd{Record Syntax}\label{matching-record-syntax}
+
   Normally pattern matching occurs based on the position of arguments in the
   value being matched. Types declared with record syntax, however, can match
   based on those record names. Given this data type:
@@ -1082,6 +1119,7 @@ interpreter to play with code samples shown.
 > setGreen _ = P (C 0 0 0)
 
   \sshd{Lazy Patterns}\label{lazy-patterns}
+
   This syntax, also known as \emph{irrefutable} patterns, allows pattern matches
   which always succeed. That means any clause using the pattern will succeed,
   but if it tries to actually use the matched value an error may occur. This is
@@ -1218,6 +1256,7 @@ interpreter to play with code samples shown.
   example.
 
   \sshd{Precedence \& Associativity}\label{fixity}
+
   The precedence and associativity, collectively called \emph{fixity}, of any
   operator can be set through the @infix@, @infixr@ and @infixl@ keywords. These
   can be applied both to top-level functions and to local definitions. The
@@ -1317,6 +1356,7 @@ interpreter to play with code samples shown.
  represents a new function which can be created by supplying one more argument.
 
  \sshd{Sections}\label{sections}
+
  Operators are functions, and they can be curried like any other. For example, a
  curried version of ``@+@'' can be written as:
 
@@ -1440,6 +1480,7 @@ interpreter to play with code samples shown.
 >       | otherwise = y
 
   \sshd{Type Annotations}\label{type-annotations}
+
   Sometimes Haskell cannot determine what type is meant. The classic
   demonstration of this is the so-called ``@show . read@'' problem:
 
