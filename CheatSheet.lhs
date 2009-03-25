@@ -64,13 +64,33 @@ interpreter to play with code samples shown.
 
 \shd{Reserved Words}\label{reserved-words}
 
-  The following lists the reserved words defined by Haskell. It is a syntax
-  error to give a variable or function one of these names.
+  The following words are reserved in Haskell. It is a syntax error to give a
+  variable or a function one of these names.
 
-< case, class, data, deriving, do,
-< else, if, import, in, infix, infixl,
-< infixr, instance, let, of, module,
-< newtype, then, type, where
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item @case@
+      \item @class@
+      \item @data@
+      \item @deriving@
+      \item @do@
+      \item @else@
+      \item @if@
+      \item @import@
+      \item @in@
+      \item @infix@
+      \item @infixl@
+      \item @infixr@
+      \item @instance@
+      \item @let@
+      \item @of@
+      \item @module@
+      \item @newtype@
+      \item @then@
+      \item @type@
+      \item @where@
+    \end{itemize}
+  \end{multicols}
 
 \shd{Strings}\label{strings}
 
