@@ -102,8 +102,8 @@ interpreter to play with code samples shown.
   \begin{itemize}
   \item @1@ -- Integer or Floating point
   \item @1.0, 1e10@ -- Floating point
-  \item @1.@ -- syntax error\\
-  \item @-1@ -- sugar for @(negate 1)@\\
+  \item @1.@ -- syntax error
+  \item @-1@ -- sugar for @(negate 1)@
   \item @2-1@ -- sugar for @((-) 2 1)@
   \end{itemize}
 
