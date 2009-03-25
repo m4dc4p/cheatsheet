@@ -5,6 +5,7 @@
 \linespread{1.05}
 \usepackage{helvet}
 \usepackage{multicol}
+\usepackage{float}
 \usepackage[landscape, top=0.2in, bottom=1in, left=0.2in, right=0.2in, dvips]{geometry}
 \usepackage{verbatim}
 \usepackage{fancyhdr}
@@ -247,9 +248,15 @@ interpreter to play with code samples shown.
   ``wildcard'' matching any value.
 
   \sshd{Nesting \& Capture}\label{nesting-capture}
-  Nested matching and binding are also allowed. Referring to the
-  \hyperref[maybe]{definition of @Maybe@} on page~\pageref{maybe}, we can
-  determine if any choice was given using a nested match:
+  Nested matching and binding are also allowed.
+
+\begin{figure}[H]
+% TODO: Change the background color or the border of this figure.
+< data Maybe a = Just a | Nothing
+\caption{The definition of @Maybe@}\label{maybe}
+\end{figure}
+
+  Using @Maybe@ we can determine if any choice was given using a nested match:
 
 > anyChoice1 ch =
 >   case ch of
@@ -964,11 +971,9 @@ interpreter to play with code samples shown.
 
 < data Bar = Bil (Maybe Int) | Baz
 
-  and recalling @Maybe@ is defined as:\label{maybe}
-
-< data Maybe a = Just a | Nothing
-
-  we can match on nested @Maybe@ values when @Bil@ is present:
+  \noindent and recalling the \hyperref[maybe]{definition of @Maybe@} from
+  page~\pageref{maybe} we can match on nested @Maybe@ values when @Bil@ is
+  present:
 
 < f (Bil (Just _)) = ...
 < f (Bil Nothing) = ...
