@@ -43,9 +43,7 @@ interpreter to play with code samples shown.
 
 \end{comment}
 
-\hd{Syntax}
-
-  Below the most basic syntax for Haskell is given. 
+\hd{Basic Syntax}
 
 \shd{Comments}
   A single line comment starts with `@--@' and extends to the end of the line. Multi-line
@@ -65,22 +63,23 @@ interpreter to play with code samples shown.
 < newtype, then, type, where
 
 \shd{Strings}
-  @"abc"@ -- Unicode string.\\
+
+  @"abc"@ -- Unicode string, sugar for @['a','b','c']@.\\
   @'a'@ -- Single character.
 
-  \sshd{Multi-line Strings} Normally, it is syntax error if a string has any
-  actual new line characters. That is, this is a syntax error:
+  \sshd{Multi-line Strings} Normally, it is a syntax error if a string has any
+  actual newline characters. That is, this is a syntax error:
 
 < string1 = "My long
 < string."
 
-  However, backslashes (`@\@') can be used to ``escape'' around the new line:
+  Backslashes (`@\@') can ``escape'' a newline:
 
 > string1 = "My long \
 > \string."
 
-  The area between the backslashes is ignored. An important note is that new lines
-  \emph{in} the string must still be represented explicitly:
+  The area between the backslashes is ignored. Newlines
+  \emph{in} the string must be represented explicitly:
 
 > string2 = "My long \n\
 > \string."
@@ -95,10 +94,15 @@ interpreter to play with code samples shown.
 < string.
 
 \shd{Numbers}
-  @1@ - Integer\\
-  @1.0, 1e10@ - Floating point
+
+  @1@ -- Integer or Floating point\\
+  @1.0, 1e-10@ -- Floating point\\
+  @1.@ -- syntax error\\
+  @-1@ -- sugar for @(negate 1)@\\
+  @2-1@ -- sugar for @((-) 2 1)@
 
 \shd{Enumerations} 
+
   @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.\\
   @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.\\
   @[110..100]@ -- Empty list; ranges only go forwards.\\
@@ -106,7 +110,7 @@ interpreter to play with code samples shown.
   @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.\\
   @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.\\
 
-  \noindent In fact, any value which is in the @Enum@ class can be used. E.g.,:
+  \noindent Any value in @Enum@ class can be used. E.g.,:
   
 \smallskip\noindent
   @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.\\
@@ -114,21 +118,24 @@ interpreter to play with code samples shown.
   @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
 
 \shd{Lists \& Tuples}
+
   @[]@ -- Empty list.\\
   @[1,2,3]@ -- List of three numbers.\\
   @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).\\
   @"abc"@ -- List of three characters (strings are lists).\\
-  @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).\\
+  @'a' : 'b' : 'c' : []@ -- List of characters.\\
   @(1,"a")@ -- 2-element tuple of a number and a string.\\
   @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
 
 \shd{``Layout'' rule, braces and semi-colons.}
+
  Haskell can be written using braces and semi-colons, just like C. However, no one
  does. Instead, the ``layout'' rule is used, where spaces represent scope. The general rule is -- always indent. When the compiler
  complains, indent more.
 
   \sshd{Braces and semi-colons}
-  Semi-colons terminate an expression, and braces represent
+  An expressions can be terminated by a semi-colon (`@;@'), and
+  curly braces (``@{@$\ldots$@}@'') delimit
   scope. They can be used after several keywords: @where@, @let@, @do@
   and @of@. They cannot be used when defining a function body. For 
   example, the below will not compile.
@@ -172,14 +179,13 @@ interpreter to play with code samples shown.
   column as @let@. Finally, when multiple definitions are given, all
   identifiers must appear in the same column.
   
-\hd{Keywords}
-
-  Haskell keywords are listed below, in alphabetical order.
+\hd{Keywords, Listed Alphabetically}
   
 \shd{Case}
-  @case@ is similar to a @switch@ statement in C\# or Java, but can take action based on any possible value
-  for the type of the value being inspected. Consider a simple data type such as
-  the following:
+
+  @case@ is similar to a @switch@ statement in C\# or Java, but can match a
+  pattern: the shape of the value being inspected.
+  Consider a simple data type:
 
 > data Choices = First String | Second |
 >   Third | Fourth
@@ -191,7 +197,7 @@ interpreter to play with code samples shown.
 \end{comment}
 
 \noindent
-  @case@ can be used to determine which choice was given:
+  @case@ can determine which choice was given:
 
 > whichChoice ch =
 >   case ch of
@@ -199,11 +205,11 @@ interpreter to play with code samples shown.
 >     Second -> "2nd!"
 >     _ -> "Something else."
 
-  As with pattern-matching in function definitions, the `@_@' character is a ``wildcard''
-  and matches any value.
+  As with pattern-matching in function definitions, the `@_@' token is a ``wildcard''
+  matching any value.
 
   \sshd{Nesting \& Capture}
-  Nested matching and argument capture are also allowed. Referring to the definition of @Maybe@ below,
+  Nested matching and binding are allowed. Referring to the definition of @Maybe@ below,
   we can determine if any choice was given using a nested match:
 
 > anyChoice1 ch =
@@ -213,7 +219,7 @@ interpreter to play with code samples shown.
 >     Just Second -> "Second!"
 >     _ -> "Something else."
 
-  We can use argument capture to display the value matched if we wish:%
+  Binding can be used to manipulate the value matched:%
 
 > anyChoice2 ch =
 >   case ch of
@@ -226,9 +232,8 @@ interpreter to play with code samples shown.
 >     _ -> "Not first."
 
   \sshd{Matching Order}
-  Matching proceeds from top to bottom. If we re-wrote @anyChoice1@ as
-  below, we'll never know what choice was actually given
-  because the first pattern will always succeed:
+  Matching proceeds from top to bottom. If @anyChoice1@ is reordered as
+  follows, the first pattern will always succeed:
 
 > anyChoice3 ch =
 >   case ch of
@@ -242,8 +247,8 @@ interpreter to play with code samples shown.
   definitions. The only difference is the use of the @->@ instead of @=@. Here
   is a simple function which does a case-insensitive string match:
 
-> strcmp [] [] = True
 > strcmp s1 s2 = case (s1, s2) of
+>   ([], []) -> True
 >   (s1:ss1, s2:ss2)
 >     | toUpper s1 == toUpper s2 ->
 >         strcmp ss1 ss2
@@ -271,8 +276,8 @@ interpreter to play with code samples shown.
 > class Flavor a where
 >   flavor :: a -> String
 
-  Notice that the declaration only gives the type signature of the function -
-  no implementation is given here (with some exceptions, see ``Defaults''
+  Notice that the declaration only gives the type signature of the function---no
+  implementation is given here (with some exceptions, see ``Defaults''
   below). Continuing, we can define several instances:
   
 > instance Flavor Bool where
@@ -296,7 +301,7 @@ interpreter to play with code samples shown.
   Default implementations can be given for functions in a class. These
   are useful when certain functions can be defined in terms of others in
   the class. A default is defined by giving a body to one of the member
-  functions. The canonical example is @Eq@, which can defined @/=@ (not equal)
+  functions. The canonical example is @Eq@, which defines @/=@ (not equal)
   in terms of @==@. :
   
 < class Eq a where
@@ -304,10 +309,11 @@ interpreter to play with code samples shown.
 <   (/=) :: a -> a -> Bool
 <   (/=) a b = not (a == b)
 
-  In fact, recursive definitions can be created, but one class member must
-  always be implemented by any @instance@ declarations.
+  Recursive definitions can be created, but an @instance@ declaration
+  must always implement at least one class member.
 
 \shd{Data}
+
   So-called \emph{algebraic data types} can be declared as follows:
 
 > data MyType = MyValue1 | MyValue2
@@ -318,14 +324,13 @@ interpreter to play with code samples shown.
 
 \end{comment}
 
-  @MyType@ is the type's \emph{name}. @MyValue1@ and @MyValue@ are \emph{values}
+  @MyType@ is the type's \emph{name}. @MyValue1@ and @MyValue2@ are \emph{values}
   of the type and are called \emph{constructors}. Multiple constructors are separated
-  with the `||' character. Note that type and constructor names
+  with the `@|@' character. Note that type and constructor names
   \emph{must} start with a capital letter. It is a syntax error otherwise.
 
   \sshd{Constructors with Arguments} The type above is not very interesting except as an enumeration. Constructors
-  that take arguments can be declared, allowing more information to be stored with
-  your type:
+  that take arguments can be declared, allowing more information to be stored:
 
 > data Point = TwoD Int Int
 >   | ThreeD Int Int Int
@@ -409,7 +414,7 @@ interpreter to play with code samples shown.
   types are those in the @Num@ class.
 
   \sshd{Deriving}
-  Many types have common operations which are tedious to define yet very necessary, such
+  Many types have common operations which are tedious to define yet necessary, such
   as the ability to convert to and from strings, compare for equality, or order in a sequence. These
   capabilities are defined as typeclasses in Haskell.
 
@@ -418,7 +423,7 @@ interpreter to play with code samples shown.
   type. The seven supported typeclasses are: @Eq@, @Read@, @Show@, @Ord@, @Enum@, @Ix@, and @Bounded@.
 
   Two forms
-  of @deriving@ are possible. The first is used when a type only derives on class:
+  of @deriving@ are possible. The first is used when a type only derives one class:
 
 > data Priority = Low | Medium | High
 >   deriving Show
@@ -435,13 +440,15 @@ interpreter to play with code samples shown.
   See the section on @deriving@ under the @data@ keyword above.
 
 \shd{Do}
+
   The @do@ keyword indicates that the code to follow will be in a \emph{monadic}
   context. Statements are separated by newlines, assignment is indicated by @<-@,
   and a @let@ form is introduce which does not require the @in@ keyword.
 
   \sshd{If and IO}
-  @if@ is tricky when used with IO. Conceptually it is are no different, but
-  intuitively it is hard to deal with. Consider the function @doesFileExists@
+  @if@ can be tricky when used with IO. Conceptually it is are no different from
+  an @if@ in any other context, but the intuition for appropriate usage can be hard
+  to develop. Consider the function @doesFileExists@
   from @System.Directory@:
 
 < doesFileExist :: FilePath -> IO Bool
@@ -468,9 +475,9 @@ interpreter to play with code samples shown.
 >     then return 1
 >     else return 0
 
-  Notice the use of @return@, too. Because @do@ puts us ``inside'' the @IO@
+  Notice the use of @return@. Because @do@ puts us ``inside'' the @IO@
   monad, we can't ``get out'' except through @return@. Note that we don't
-  have to use @if@ inline here - we can also use @let@ to evaluate the condition
+  have to use @if@ inline here---we can also use @let@ to evaluate the condition
   and get a value first:
 
 > right2 fileName = do
@@ -518,8 +525,8 @@ interpreter to play with code samples shown.
 >          show (length f)
 >          ++ " bytes long.")
 
-  An alternative is to provide semi-colons and braces. A @do@ is still required, but
-  no indenting is needed. The below shows a @case@ example but it applies to @if@ as well:
+  An alternative syntax uses semi-colons and braces. A @do@ is still required, but
+  indention is unnecessary. This code shows a @case@ example, but it applies to @if@ as well:
 
 > countBytes3 =
 >   do
@@ -533,9 +540,11 @@ interpreter to play with code samples shown.
 >          ++ " bytes long."); }
 
 \shd{Export}
+
   See the section on @module@ below.
   
 \shd{If, Then, Else}
+
   Remember, @if@ always ``returns'' a value. It is an expression, not
   just a control flow statement. This function tests if the string given
   starts with a lower case letter and, if so, converts it to upper case:
@@ -566,8 +575,9 @@ interpreter to play with code samples shown.
   See the section on @class@ above.
   
 \shd{Let}
-  Local functions can be defined within a function using @let@. @let@ is always
-  followed by @in@. @in@ must appear in the same column as the @let@ keyword. Functions defined
+
+  Local functions can be defined within a function using @let@. The @let@ keyword must always be
+  followed by @in@. The @in@ must appear in the same column as the @let@ keyword. Definitions
   have access to all other functions and variables within
   the same scope (including those defined by @let@). In this example, @mult@ multiplies its argument @n@ by @x@, which
   was passed to the original @multiples@. @mult@ is used by map to give
@@ -591,8 +601,8 @@ interpreter to play with code samples shown.
 >      ", mid: " ++ show mid
 
   \sshd{Deconstruction}
-  The left-hand side of a @let@ definition can also deconstruct its argument,
-  in case sub-components are going to be accessed. This definition would extract
+  The left-hand side of a @let@ definition can also de-structure its argument,
+  in case sub-components are to be accessed. This definition would extract
   the first three characters from a string
 
 > firstThree str =
@@ -606,7 +616,7 @@ interpreter to play with code samples shown.
   has three characters:
 
 > onlyThree str =
->   let (a:b:c) = str
+>   let (a:b:c:[]) = str
 >   in "The characters given are: " ++
 >       show a ++ ", " ++ show b ++
 >       ", and " ++ show c
@@ -616,6 +626,7 @@ interpreter to play with code samples shown.
   See the section on @case@ above.
   
 \shd{Module}
+
   A module is a compilation unit which exports functions, types, classes,
   instances, and other modules. A module can only be defined in one file, though
   its exports may come from multiple sources. To make a Haskell file a module,
@@ -651,7 +662,7 @@ interpreter to play with code samples shown.
 
 < import Text.Read (Lexeme)
 
-  Of course, this prevents our module from pattern-matching on the values of type
+  Of course, this precludes our module from pattern-matching on the values of type
   @Lexeme@. We can import one or more constructors explicitly:
 
 < import Text.Read (Lexeme(Ident, Symbol))
@@ -664,7 +675,7 @@ interpreter to play with code samples shown.
 
 < import Text.Read (Read, ReadS)
 
-  In the case of classes, we can import the functions defined for the
+  In the case of classes, we can import the functions defined for a class
   using syntax similar to importing constructors for data types:
 
 < import Text.Read (Read(readsPrec
@@ -675,7 +686,8 @@ interpreter to play with code samples shown.
 
 < import Text.Read (Read())
 
-  \sshd{Exclusions} If most, but not all, names are going to imported from a module, it would
+  \sshd{Exclusions}
+  If most, but not all, names are going to imported from a module, it would
   be tedious to specify all those names except a few. For that reason, imports can also
   be specified via the @hiding@ keyword:
 
@@ -685,8 +697,9 @@ interpreter to play with code samples shown.
   Except for instance declarations, any type, function, constructor or class can
   be hidden.
 
-  \sshd{Instance Declarations} It must be noted that @instance@ declarations \emph{cannot} be excluded
-  from import. \emph{Any} @instance@ declarations in a module will be imported when
+  \sshd{Instance Declarations}
+  It must be noted that @instance@ declarations \emph{cannot} be excluded
+  from import: all @instance@ declarations in a module will be imported when
   the module is imported.
 
   \sshd{Qualified Imports}
@@ -755,7 +768,7 @@ interpreter to play with code samples shown.
 
   While @data@ introduces new values and @type@ just creates synonyms, @newtype@ falls
   somewhere between. The syntax for @newtype@ is
-  quite restricted -- only one constructor can be defined, and that constructor can
+  quite restricted---only one constructor can be defined, and that constructor can
   only take one argument. Continuing the example above, we can define a @Phone@
   type like the following:
 
@@ -827,8 +840,8 @@ interpreter to play with code samples shown.
 > lName (Person f l ) =
 >   Person (lower f) (lower l)
 
-  Because @type@ is just a synonym, it can't declare multiple constructors like @data@
-  can. Type variables can be used, but there cannot be more than the type variables declared with the
+  Because @type@ is just a synonym, unlike @data@, it cannot declare multiple constructors.
+  Type variables can be used, but there cannot be more than the type variables declared with the
   original type. That means a synonym like the following is possible:
 
 < type NotSure a = Maybe a
@@ -853,7 +866,8 @@ interpreter to play with code samples shown.
 >   where result = show (length f)
 >
 
-  \sshd{Where vs. Let} A @where@ clause can only be defined at the level of a function definition. Usually, that is
+  \sshd{Where vs. Let}
+  A @where@ clause can only be defined at the level of a function definition. Usually, that is
   identical to the scope of @let@ definition. The only difference is when guards are being used. The scope of the @where@
   clause extends over all guards. In contrast, the scope of a @let@ expression is only the current function clause \emph{and}
   guard, if any.
@@ -864,6 +878,7 @@ interpreter to play with code samples shown.
   and other areas of the language.
 
 \shd{Function Definition}
+
   Functions are defined by declaring their name, any arguments, and an equals sign:
 
 > square x = x * x
@@ -904,17 +919,17 @@ interpreter to play with code samples shown.
 
   Pattern-matching also allows values to be assigned to variables. For example,
   this function determines if the string given is empty or not. If not, the
-  value captures in @str@ is converted to to lower case:
+  value bound to @str@ is converted to lower case:
 
 > toLowerStr [] = []
 > toLowerStr str = map toLower str
 >   
 
-  In reality, @str@ is the same as @_@ in that it will match anything, except
-  the value matched is also given a name.
+  Note that @str@ above is similer to @_@ in that it will match anything; the
+  only difference is that the value matched is also given a name.
 
   \sshd{{\ensuremath $n + k$} Patterns}
-  This sometimes controversial pattern-matching facility makes it easy to match
+  This (sometimes controversial) pattern-matching facility makes it easy to match
   certain kinds of numeric expressions. The idea is to define a base case (the ``$n$'' portion) with a
   constant number for matching, and then to define other matches (the ``$k$'' portion) as additives
   to the base case. Here is a rather inefficient way of testing if a number is
@@ -925,8 +940,8 @@ interpreter to play with code samples shown.
 > isEven (n + 2) = isEven n
 
   \sshd{Argument Capture}
-  Argument capture is useful for pattern-matching a value AND using it,
-  without declaring an extra variable. Use an |@| symbol in between
+  Argument capture is useful for pattern-matching a value \emph{and} using it,
+  without declaring an extra variable. Use an `|@|' symbol in between
   the pattern to match and the variable to assign the value to. This facility
   is used below to capture the head of the list in @l@ for display, while
   also capturing the entire list in @ls@ in order to compute its length:
@@ -990,7 +1005,7 @@ interpreter to play with code samples shown.
 > isGreenZero _ = False
 
   Argument capture is possible with this syntax, though it gets clunky. Continuing
-  the above, now define a @Pixel@ type and a function to replace values with
+  the above, we now define a @Pixel@ type and a function to replace values with
   non-zero @green@ components with all black:
 
 > data Pixel = P Color
@@ -1058,7 +1073,7 @@ interpreter to play with code samples shown.
 
 \shd{List Comprehensions}
 
-  A list comprehension consists of four types of elements - \emph{generators},
+  A list comprehension consists of four types of elements: \emph{generators},
   \emph{guards}, \emph{local bindings}, and \emph{targets}. A list
   comprehension creates a list of target values based on the generators
   and guards given. This comprehension generates all squares:
@@ -1094,7 +1109,7 @@ interpreter to play with code samples shown.
 >   [c | c <- [minBound .. maxBound]
 >      , isUpper c]
 
-  Or to find all occurrences of a particular break value @br@ in a list
+  Or, to find all occurrences of a particular break value @br@ in a list
   @word@ (indexing from 0):
 
 > idxs word br =
@@ -1102,14 +1117,14 @@ interpreter to play with code samples shown.
 >       , c == br]
 
   A unique feature of list comprehensions is that pattern matching failures
-  do not cause an error - they are just excluded from the resulting list. 
+  do not cause an error; they are just excluded from the resulting list. 
 
 \shd{Operators}
 
-  There are very few predefined ``operators'' in Haskell - most that do
+  There are very few predefined ``operators'' in Haskell---most that do
   look predefined are actually syntax (e.g., ``@=@''). Instead, operators
   are simply functions that take two arguments and have special syntax support.
-  Any so-called operator can be applied as a normal function using parentheses:
+  Any so-called operator can be applied as a normal ``prefix'' function using parentheses:
 
 < 3 + 4 == (+) 3 4
 
@@ -1150,7 +1165,7 @@ interpreter to play with code samples shown.
 
   \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually be any
   function which takes two arguments (i.e., any binary operation). Whether the operator is left or right
-  associative is specified by @infixl@ or @infixr@, respectively. @infix@ declarations
+  associative is specified by @infixl@ or @infixr@, respectively. Such @infix@ declarations
   have no associativity.
 
   Precedence and associativity make many of the rules of arithmetic work ``as expected.''
@@ -1269,13 +1284,13 @@ interpreter to play with code samples shown.
 
 > noGreen1 (C r _ b) = C r 0 b
   
-  The above is a bit verbose and we can rewrite using record syntax. This kind
+  This is a bit verbose, and we can rewrite using record syntax. This kind
   of ``update'' only sets values for the
   field(s) specified and copies the rest:
   
 > noGreen2 c = c { green = 0 }
 
-  Above, we capture the @Color@ value in @c@ and return a new @Color@ value. That value happens
+  Here we capture the @Color@ value in @c@ and return a new @Color@ value. That value happens
   to have the same value for @red@ and @blue@ as @c@ and it's @green@ component is 0.
   We can combine this with pattern matching to set the @green@ and @blue@ fields
   to equal the @red@ field:
@@ -1318,15 +1333,15 @@ interpreter to play with code samples shown.
 
 \shd{Type Signatures}
 
-  Haskell supports full type-inference, meaning in most cases no types have
+  Haskell supports full type inference, meaning in most cases no types have
   to be written down. Type signatures are still useful for at least two reasons.
 
   \begin{description}
-  \item{\emph{Documentation}} -- Even if the compiler can figure out the types of
+  \item{\emph{Documentation}}---Even if the compiler can figure out the types of
   your functions, other programmers or even yourself might not be able to later. Writing
   the type signatures on all top-level functions is considered very good form.
 
-  \item{\emph{Specialization}} -- Typeclasses allow functions with overloading. For example,
+  \item{\emph{Specialization}}---Typeclasses allow functions with overloading. For example,
   a function to negate any list of numbers has the signature:
 
 < negateAll :: Num a => [a] -> [a]
@@ -1337,13 +1352,13 @@ interpreter to play with code samples shown.
 < negateAll :: [Int] -> [Int]
   \end{description}
 
-  Type signatures can appear on top-level functions and nested @let@ or @where@ definitions. Generally this
-  is useful for documentation, though in some case you may use it prevent polymorphism. A type signature
-  is first the name of the item which will be typed, followed by a @::@, followed by the types. An example
+  Type signatures can be used on top-level functions and nested @let@ or @where@ definitions. Generally they are
+  useful for documentation, although in some cases they are needed to prevent polymorphism. A type signature
+  is first the name of the item which will be typed, followed by a @::@, followed by the type. An example
   of this has already been seen above.
 
   Type signatures do not need to appear directly above their implementation. They can be specified
-  anywhere in the containing module (yes, even below!). Multiple items
+  anywhere in the containing module (yes, even below!) Multiple items
   with the same signature can also be defined together:
 
 > pos, neg :: Int -> Int
@@ -1357,9 +1372,8 @@ interpreter to play with code samples shown.
 >       | otherwise = y
 
   \sshd{Type Annotations}
-
-  Sometimes Haskell will not be able to determine what type you meant. The classic
-  demonstration of this is the ``@show . read@'' problem:
+  Sometimes Haskell cannot determine what type is meant. The classic
+  demonstration of this is the so-called ``@show . read@'' problem:
 
 < canParseInt x = show (read x)
 
@@ -1368,9 +1382,10 @@ interpreter to play with code samples shown.
 
 > canParseInt x = show ((read x) :: Int)
 
-  Annotations have a similar syntax as type signatures, except they appear in-line with functions.
+  Annotations have identical syntax to type signatures, but may adorn any expression.
 
 \shd{Unit}
+
   @()@ -- ``unit'' type and ``unit'' value. The value and type that represents no
   useful information.
 
