@@ -4,6 +4,7 @@
 \usepackage[sc]{mathpazo}
 \linespread{1.05}
 \usepackage{helvet}
+\usepackage[superscript]{todo}
 
 \usepackage{multicol}
 \usepackage{float}
@@ -261,10 +262,10 @@ interpreter to play with code samples shown.
   Nested matching and binding are also allowed.
 
 \begin{figure}[H]
-\typeout{TODO: Change the background color or the border of this figure.}
 < data Maybe a = Just a | Nothing
 \caption{The definition of @Maybe@}\label{maybe}
 \end{figure}
+\todo[colorize]{Change the background color or the border of this figure.}
 
   Using @Maybe@ we can determine if any choice was given using a nested match:
 
@@ -861,7 +862,7 @@ interpreter to play with code samples shown.
 > newtype Work = W String
 > data Phone = Phone Home Work
 
-\typeout{FIXME: lowerName function from above?}
+\todo[use lowerName?]{lowerName function from above?}
 
   As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
   just @String@ values. The typechecker treats them as entirely new types. That
@@ -1511,6 +1512,8 @@ interpreter to play with code samples shown.
   Visit CodeSlower.com\footnote{\url{http://blog.codeslower.com/}} for other
   projects and writings.
 
+\newpage
+\todos
 \end{multicols}
 \end{document}
 
