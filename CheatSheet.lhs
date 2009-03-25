@@ -4,14 +4,17 @@
 \usepackage[sc]{mathpazo}
 \linespread{1.05}
 \usepackage{helvet}
+
 \usepackage{multicol}
 \usepackage{float}
 \usepackage[landscape, top=0.2in, bottom=1in, left=0.2in, right=0.2in, dvips]{geometry}
 \usepackage{verbatim}
 \usepackage{fancyhdr}
+
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
 \hypersetup{colorlinks}
+
 \pagestyle{fancy}
 \fancyhf{}
 \lfoot{\copyright\ 2009 Justin Bailey.}
@@ -30,6 +33,7 @@
 \newcommand{\hd}[1]{\section*{\textsf{#1}}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
 \newcommand{\sshd}[1]{\subsubsection*{\textsf{#1}}}
+
 \let\origitemize\itemize
 \let\endorigitemize\enditemize
 \renewenvironment{itemize}{
@@ -39,6 +43,7 @@
 }{
   \end{origitemize}
 }
+
 \begin{document}
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
