@@ -1,6 +1,13 @@
 all: CheatSheet.dvi
 all: CheatSheet.pdf
 
+# The output of lhs2TeX
+cleansuffix += .tex
+# Various temporary files from LaTeX
+cleansuffix += .aux .log .out .ptb
+# The final output
+cleansuffix += .dvi .ps .pdf
+
 latexflags := -interaction=nonstopmode -file-line-error-style
 latex      := latex $(latexflags)
 pdflatex   := pdflatex $(latexflags)
@@ -32,5 +39,4 @@ endef
 
 .PHONY: clean
 clean:
-	$(RM) CheatSheet.tex CheatSheet.aux CheatSheet.log \
-	  CheatSheet.dvi CheatSheet.pdf CheatSheet.ps
+	$(RM) $(addprefix CheatSheet,$(cleansuffix))
