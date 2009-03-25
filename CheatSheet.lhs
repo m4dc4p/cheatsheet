@@ -10,6 +10,7 @@
 \usepackage[landscape, top=0.2in, bottom=1in, left=0.2in, right=0.2in, dvips]{geometry}
 \usepackage{verbatim}
 \usepackage{fancyhdr}
+\usepackage{paralist}
 
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
@@ -33,16 +34,6 @@
 \newcommand{\hd}[1]{\section*{\textsf{#1}}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
 \newcommand{\sshd}[1]{\subsubsection*{\textsf{#1}}}
-
-\let\origitemize\itemize
-\let\endorigitemize\enditemize
-\renewenvironment{itemize}{
-  \begin{origitemize}
-  \setlength{\itemsep}{0pt}
-  \setlength{\parskip}{0pt}
-}{
-  \end{origitemize}
-}
 
 \begin{document}
 \begin{multicols}{3}
@@ -86,7 +77,7 @@ interpreter to play with code samples shown.
   variable or a function one of these names.
 
   \begin{multicols}{3}
-    \begin{itemize}
+    \begin{compactitem}
       \item @case@
       \item @class@
       \item @data@
@@ -107,15 +98,15 @@ interpreter to play with code samples shown.
       \item @then@
       \item @type@
       \item @where@
-    \end{itemize}
+    \end{compactitem}
   \end{multicols}
 
 \shd{Strings}\label{strings}
 
-  \begin{itemize}
+  \begin{compactitem}
   \item @"abc"@ -- Unicode string, sugar for @['a','b','c']@.
   \item @'a'@ -- Single character.
-  \end{itemize}
+  \end{compactitem}
 
   \sshd{Multi-line Strings}\label{multi-line-strings}
 
@@ -147,36 +138,36 @@ interpreter to play with code samples shown.
 
 \shd{Numbers}\label{numbers}
 
-  \begin{itemize}
+  \begin{compactitem}
   \item @1@ -- Integer or Floating point
   \item @1.0, 1e10@ -- Floating point
   \item @1.@ -- syntax error
   \item @-1@ -- sugar for @(negate 1)@
   \item @2-1@ -- sugar for @((-) 2 1)@
-  \end{itemize}
+  \end{compactitem}
 
 \shd{Enumerations}\label{enumerations}
 
-  \begin{itemize}
+  \begin{compactitem}
   \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
   \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
   \item @[110..100]@ -- Empty list; ranges only go forwards.
   \item @[0, -1 ..]@ -- Negative integers.
   \item @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.
   \item @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
-  \end{itemize}
+  \end{compactitem}
 
   \noindent In fact, any value which is in the @Enum@ class can be used:
 
-  \begin{itemize}
+  \begin{compactitem}
   \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
   \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
   \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
-  \end{itemize}
+  \end{compactitem}
 
 \shd{Lists \& Tuples}\label{lists-tuples}
 
-  \begin{itemize}
+  \begin{compactitem}
   \item @[]@ -- Empty list.
   \item @[1,2,3]@ -- List of three numbers.
   \item @1 : 2 : 3 : []@ -- Alternate way to write lists using ``cons'' (@:@) and ``nil'' (@[]@).
@@ -184,7 +175,7 @@ interpreter to play with code samples shown.
   \item @'a' : 'b' : 'c' : []@ -- List of characters (same as @"abc"@).
   \item @(1,"a")@ -- 2-element tuple of a number and a string.
   \item @(head, tail, 3, 'a')@ -- 4-element tuple of two functions, a number and a character.
-  \end{itemize}
+  \end{compactitem}
 
 \shd{``Layout'' rule, braces and semi-colons.}\label{layout}
 
@@ -889,13 +880,13 @@ interpreter to play with code samples shown.
   The key observation is that this keyword does not introduce a new value;
   instead it introduces a new type. This gives us two very useful properties:
 
-  \begin{itemize}
+  \begin{compactitem}
   \item No runtime cost is associated with the new type, since it does not
   actually produce new values. In other words, newtypes are absolutely free!
 
   \item The type-checker is able to enforce that common types such as @Int@ or
   @String@ are used in restricted ways, specified by the programmer.
-  \end{itemize}
+  \end{compactitem}
 
   Finally, it should be noted that any @deriving@ clause which can be attached
   to a @data@ declaration can also be used when declaring a @newtype@.
