@@ -12,7 +12,7 @@ define run-while-needed
 	@while true; do \
 	  printf '%s\n' '$(1) "$<"'; \
 	  $(1) "$<" >/dev/null; \
-	  if ! egrep -q 'LaTeX Warning:.*Rerun' "$(<:.tex=.log)"; then break; fi; \
+	  if ! egrep -q 'Warning:.*Rerun' "$(<:.tex=.log)"; then break; fi; \
 	done; \
 	egrep '\.tex:|Warning|Error' "$(<:.tex=.log)" >&2 || true; \
 	! egrep -q Error "$(<:.tex=.log)"
