@@ -4,7 +4,6 @@
 \usepackage[sc]{mathpazo}
 \linespread{1.05}
 \usepackage{helvet}
-\usepackage[superscript]{todo}
 
 \usepackage{multicol}
 \usepackage{float}
@@ -12,6 +11,7 @@
 \usepackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{paralist}
+\usepackage[hide]{todo}
 
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
