@@ -1,4 +1,11 @@
-% The Haskell Cheatsheet
+<div id="wrapper">
+<div id="article" class="post">
+<div id="mainCol" class="fix">
+
+
+## The Haskell Cheatsheet
+
+<div id="blogbody" class="entry">
 
 Learning Haskell is not easy. Besides the syntax, concepts, and
 advanced types, there is a real lack of succinct, accessible
@@ -6,7 +13,7 @@ references. As I learned Haskell I frequently wanted a quick reference
 for syntax, keywords and other language elements. [The Haskell Report](http://haskell.org/onlinereport),
 while very thorough, wasn't quite it. 
 
-For that reason I've created [this cheatsheet](/static/CheatSheet.pdf). It's intended for
+For that reason I've created [this cheatsheet](CheatSheet.pdf). It's intended for
 beginning to intermediate Haskell programmers to use as a
 quick-reference guide for syntax, keywords or other language
 issues. You can obtain it in three different ways:
@@ -23,6 +30,11 @@ is directly executable. That file is available when using the latter
 two options above.
 
 Feedback, comments and patches are welcome. Comment here or send me an
-email (<tt>jgbailey@codeslower.com</tt>). The
-source is hosted at [github.com](http://gitub.com) and patches can be
-submitted to <tt>git://github.com/m4dc4p/cheatsheet.git</tt>.
+email (<tt>jgbailey@codeslower.com</tt>). The source is hosted at
+[http://github.com/m4dc4p/cheatsheet/tree/master](http://github.com/m4dc4p/cheatsheet/tree/master)
+and patches can be submitted to
+<tt>git://github.com/m4dc4p/cheatsheet.git</tt>.  
+</div>
+</div>
+</div>
+</div>

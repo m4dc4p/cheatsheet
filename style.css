@@ -29,25 +29,17 @@ h2{font-size:18pt;}
 h3{font-size:16pt;}
 h4{font-size:14pt;}
 
-a{color:#333;text-decoration:underline;}
+a{color:#333;text-decoration:none;}
 a:hover{color:#666;}
-a.title{color:#333;text-decoration:none;}
 #wrapper{margin: 5px auto;text-align:left;width:900px;}
 #wrapper pre, #wrapper p { clear: none; }
 th,td{padding:3px 20px 3px 0px;}
 
-.popupDialog div.bd{text-align:center;}
-.popupDialog form{text-align: left;}
-.popupDialog form p{margin-bottom:7px;}
-.popupDialog form label{width: 400px;}
-.popupDialog form input{width: 400px;}
-.popupDialog form textarea{width: 400px; margin:0px 5px;}
-
 /* masthead / footer - navigation and categories */
-#masthead{padding:0px 0 5px 0; border-bottom: solid 1px black}
-#masthead h1 {margin:2px 0 0 0; display:inline}
-#masthead h1 a{text-transform:uppercase;font-family: consolas, courier new; padding-right:5px; float:left}
-#masthead h1 em{font-style: italic;color:#555; font-size: 16pt;padding-top:5px; float: right; display: inline}
+#masthead{padding:0px 0 5px 0;}
+#masthead h1 {width:600px; float:left; margin:2px 0 0 0;}
+#masthead h1 a{text-transform:uppercase;font-family: consolas, courier new; padding-right:5px}
+#masthead h1 em{font-style: italic;color:#555; font-size: 16pt;padding-left:5px}
 #authorBlurb img{float:right;width:42px;height:42px;border:3px solid #EEE;}
 #authorIntro a{font-weight:bold;}
 
@@ -85,7 +77,7 @@ li.top a{width:100px;}
 #searchWrap,
 .middle_links{margin-bottom:20px;}
 #searchWrap input{vertical-align:middle;}
-#searchWrap #s{font-size:1.1em;border:1px solid #BBB;padding:1px 2px;width:220px;}
+#searchWrap #s{font-size:1.1em;border:1px solid #BBB;padding:1px 2px;margin-right:3px;width:220px;}
 .middle_links h3{margin-bottom:7px;}
 #midCol ul{list-style:none;margin:8px 0 4px;}
 .middle_links ul li{background:url(images/li.gif) no-repeat 0 3px;color:#7F7F7F;line-height:1.2em;border-top:1px solid #BBB;padding:4px 0 4px 16px;}
@@ -98,14 +90,13 @@ ul#imgLinks{list-style:none;margin:7px 0;}
 #imgLinks li a img{border:3px solid #EEE;width:208px;color:#333;font-weight:bold;}
 #imgLinks li a img.anyheight{border:none;width:214px;color:#333;font-weight:bold;}
 #imgLinks li a:hover img{border-color:#DDD;}
-#amazon{margin:0 0 0 30px;}
 
 /* wordpress entries styling - main content column */
 .postMeta{text-transform:uppercase;font-size:11px;text-align:right;margin-bottom:5px;}
 .postMeta span.date{background:#FFF;color:#7F7F7F;padding:0 2px 0 4px;}
 .postMeta span.comments{background:#FFF url(images/chat_grey.gif) no-repeat right center;padding-right:15px;margin-right:2px;}
 .postMeta span.comments a,
-.postMeta span.date{color:#555;}
+.postMeta span.date a{color:#555;}
 .postMeta span.articlebtn{background:#FFF;}
 .postMeta span.articlebtn a{background:#CCC;color:#000;padding:0 6px;margin:0 2px;text-transform:none;}
 .postMeta span.articlebtn a:hover{background:#D33;}
@@ -136,30 +127,26 @@ ul#imgLinks{list-style:none;margin:7px 0;}
 p.tags a {font-weight:normal; margin: 0 0.8em; white-space: nowrap; color: #777777; background: transparent url(images/dot.gif) repeat-x scroll left bottom;}
 
 /* style me some comments and inputs */
-#comments{padding:12px 0 0 0;}
+#comments{width:435px;padding:12px 0 0 0;}
 #comments h3,
 h3#respond{color:#555;margin-bottom:7px;}
-#commentslist{list-style:none;margin:5px 0 12px;}
-#commentslist li{background:#FFF url(images/lgrey_diag.gif) repeat top left;border:1px solid #BBB;margin-bottom:7px;padding:7px 0;}
-#commentslist li a{font-size:10px;background:url(images/dot.gif) repeat-x bottom left;text-transform:none;}
-#commentslist li.alt{background:#FFF;}
-#commentslist li:hover{border-color:#888;}
-#commentslist .comment_text li{list-style:normal;background:#FFF;border:none;margin:0 0 0 14px;padding:0;}
-#commentslist .comment_text{margin:0 7px;line-height:1.4em;overflow:hidden;}
+ol.commentslist{list-style:none;margin:5px 0 12px;}
+.commentslist li{background:#FFF url(images/lgrey_diag.gif) repeat top left;border:1px solid #BBB;margin-bottom:7px;padding:7px 0;}
+.commentslist li a{font-weight:bold;background:url(images/dot.gif) repeat-x bottom left;}
+.commentslist li.alt{background:#FFF;}
+.commentslist li:hover{border-color:#888;}
+.commentslist .comment_text{margin:0 7px;line-height:1.4em;overflow:hidden;}
 .comment_text p,
 .comment_text ul,
 .comment_text ol,
 .comment_text blockquote{margin:1em 0;}
 .comment_text ul,
 .comment_text ol,
-.comment_text blockquote{margin:0 1em;}
-p.comment_meta span.subject{font-weight:bold;text-transform:uppercase;margin:0 0 0 7px;}
-p.comment_meta span.user{font-weight:bold;}
-p.comment_meta span.date{font-weight:normal;text-align:right;}
+.comment_text blockquote{margin:0 1em;}p.author_meta{font-weight:bold;text-transform:uppercase;margin:0 0 0 7px;}
 p.post_meta{font-size:11px;text-transform:uppercase;text-align:right;margin:0 7px 0 0;}
-#commentslist li.author{background:#333;color:#CCC;}
-#commentslist li.author a{color:#DDD;}
-#commentslist li.author a:hover{color:#FFF;}
+.commentslist li.author{background:#333;color:#CCC;}
+.commentslist li.author a{color:#DDD;}
+.commentslist li.author a:hover{color:#FFF;}
 #comments_closed{background:#333;color:#ccc;padding:7px 0;margin-top:12px;line-height: 1.5em;}
 p.nocomments{margin:0 12px 0 7px;}
 p.nocomments a{color:#ddd;font-weight:bold;text-decoration:underline;}
@@ -167,19 +154,6 @@ p.nocomments a:hover{color:#FFF;}
 ol.pingslist{margin:1.5em 2em;font-size:12px;}
 .pingslist li{color:#7F7F7F;margin:0 0 7px 0;}
 .pingslist li a{font-weight:bold;background:url(images/dot.gif) repeat-x bottom left;}
-.captcha {font-family: consolas, courier new, sans-serif}
-
-/* Some indentations useful for tree placement of comments */
-#comments_wrapper li.indent1{margin-left: 0em;}
-#comments_wrapper li.indent2{margin-left: 2em;}
-#comments_wrapper li.indent3{margin-left: 4em;}
-#comments_wrapper li.indent4{margin-left: 6em;}
-#comments_wrapper li.indent5{margin-left: 8em;}
-#comments_wrapper li.indent6{margin-left: 10em;}
-#comments_wrapper li.indent7{margin-left: 12em;}
-#comments_wrapper li.indent8{margin-left: 13em;}
-#comments_wrapper li.indent9{margin-left: 14em;}
-#comments_wrapper li.indent10{margin-left: 15em;}
 
 #htmlform p{margin:1em 0;}
 #htmlform p a{font-weight:bold;background:url(images/dot.gif) repeat-x bottom left;}

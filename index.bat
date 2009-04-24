@@ -1,1 +1,1 @@
-pandoc -r markdown -t html -o index.html -S "index.txtm"
+pandoc -c style.css -s -r markdown -t html -o index.html "index.txtm"
