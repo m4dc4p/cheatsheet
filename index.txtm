@@ -1,6 +1,10 @@
 <div id="wrapper">
-<div id="article" class="post">
+<div id="masthead" class="fix" style="width: 100%">
+<h1 class="sans"><a href="/" class="title">codeslower.com</a> <em>Savor Your Code.</em></h1>
+</div>
+<div id="mid" class="fix">
 <div id="mainCol" class="fix">
+<div id="article" class="post">
 
 
 ## The Haskell Cheatsheet
@@ -29,11 +33,12 @@ The guide itself is written as a "literate" Haskell file, meaning it
 is directly executable. That file is available when using the latter
 two options above.
 
-Feedback, comments and patches are welcome. Comment here or send me an
-email (<tt>jgbailey@codeslower.com</tt>). The source is hosted at
+Feedback, comments and patches are welcome. Send me an
+email at <tt>jgbailey@codeslower.com</tt>. The source is hosted at
 [http://github.com/m4dc4p/cheatsheet/tree/master](http://github.com/m4dc4p/cheatsheet/tree/master)
 and patches can be submitted to
 <tt>git://github.com/m4dc4p/cheatsheet.git</tt>.  
+</div>
 </div>
 </div>
 </div>
