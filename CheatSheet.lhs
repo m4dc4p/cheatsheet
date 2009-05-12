@@ -35,7 +35,8 @@
 \newcommand{\hd}[1]{\section*{\textsf{#1}}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
 \newcommand{\sshd}[1]{\subsubsection*{\textsf{#1}}}
-
+\setlength{\columnsep}{18.0pt}
+\setlength{\columnseprule}{0.4pt}
 \begin{document}
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
@@ -69,7 +70,7 @@ interpreter to play with code samples shown.
 
   Comments above function definitions should start with `@{- |@' and those next
   to parameter types with `@-- ^@' for compatibility with
-  Haddock\footnote{\url{http://haskell.org/haddock/}}, a system for documenting
+  Haddock, a system for documenting
   Haskell code.
 
 \shd{Reserved Words}\label{reserved-words}
@@ -77,6 +78,8 @@ interpreter to play with code samples shown.
   The following words are reserved in Haskell. It is a syntax error to give a
   variable or a function one of these names.
 
+  \setlength{\columnsep}{10.0pt}
+  \setlength{\columnseprule}{0.0pt}
   \begin{multicols}{3}
     \begin{compactitem}
       \item @case@
@@ -101,6 +104,8 @@ interpreter to play with code samples shown.
       \item @where@
     \end{compactitem}
   \end{multicols}
+  \setlength{\columnsep}{18.0pt}
+  \setlength{\columnseprule}{0.4pt}
 
 \shd{Strings}\label{strings}
 
@@ -1498,21 +1503,20 @@ interpreter to play with code samples shown.
 
 \hd{Contributors}\label{contributors}
 
-  My thanks to those who contributed patches and useful suggestions: Dave Bayer,
-  Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
-  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner,
-  and Jeff Zaroyko.
+  My thanks to those who contributed patches and useful suggestions:
+  Dave Bayer, Elisa Firth, Cale Gibbard, Stephen Hicks, Kurt
+  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter,
+  Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner, and Jeff
+  Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 1.9. The source can be found at
-  GitHub\footnote{\url{http://github.com/m4dc4p/cheatsheet}}. The latest
-  released version of the PDF can be downloaded from
-  Hackage\footnote{\url{http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet}}.
-  Visit CodeSlower.com\footnote{\url{http://blog.codeslower.com/}} for other
-  projects and writings.
+  This is version 1.11. The source can be found at GitHub
+  (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
+  version of the PDF can be downloaded from
+  \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
+  (\url{http://blog.codeslower.com/}) for other projects and writings.
 
-\newpage
 \todos
 \end{multicols}
 \end{document}

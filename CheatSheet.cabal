@@ -1,10 +1,10 @@
 Name:           CheatSheet
 License:        BSD3
 License-File:   LICENSE
-Version:        1.9
-Author:         Justin Bailey
-Homepage:       http://blog.codeslower.com/2008/10/The-Haskell-Cheatsheet
-Maintainer:     jgbailey _ codeslower _ com
+Version:        1.11
+Homepage:       http://cheatsheet.codeslower.com
+Maintainer:     Justin Bailey <jgbailey@codeslower.com>
+Author:     Justin Bailey <jgbailey@codeslower.com>
 Category:       Help
 Build-Depends:  base, containers, directory
 Build-type: Simple
