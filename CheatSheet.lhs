@@ -168,8 +168,8 @@ interpreter to play with code samples shown.
   \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
   \item @[110..100]@ -- Empty list; ranges only go forwards.
   \item @[0, -1 ..]@ -- Negative integers.
-  \item @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.
-  \item @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
+  \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
+  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.  
   \end{compactitem}
 
   \noindent In fact, any value which is in the @Enum@ class can be used:
@@ -504,7 +504,7 @@ interpreter to play with code samples shown.
 < 3 + 4 == (+) 3 4
 
   To define a new operator, simply define it as a normal function, except the
-  operator appears between the two arguments. Here's one which takes inserts a
+  operator appears between the two arguments. Here's one which inserts a
   comma between two strings and ensures no extra spaces appear:
 
 > first ## last =
@@ -693,8 +693,8 @@ interpreter to play with code samples shown.
 
   which defines a function which takes an argument and returns a tuple
   containing that argument in both positions. They are useful for simple
-  functions which don't need a name. The following determines if a string has
-  mixed case (or is all whitespace):
+  functions which don't need a name. The following determines if a string
+  consists only of mixed case letters and whitespace.
 
 > mixedCase str =
 >   all (\c -> isSpace c ||
@@ -1220,7 +1220,7 @@ interpreter to play with code samples shown.
 > listStats m =
 >   let numbers = [1,3 .. m]
 >       total = sum numbers
->       mid = head (take (m `div` 2)
+>       mid = mid = head (drop (m `div` 2)
 >                        numbers)
 >   in "total: " ++ show total ++
 >      ", mid: " ++ show mid
@@ -1239,7 +1239,7 @@ interpreter to play with code samples shown.
 >       show c
 
   Note that this is different than the following, which only works if the string
-  has three characters:
+  has exactly three characters:
 
 > onlyThree str =
 >   let (a:b:c:[]) = str
@@ -1273,7 +1273,7 @@ interpreter to play with code samples shown.
 
   The Haskell standard libraries are divided into a number of modules. The
   functionality provided by those libraries is accessed by importing into your
-  source file. To import all everything exported by a library, just use the
+  source file. To import everything exported by a library, just use the
   module name:
 
 < import Text.Read
@@ -1513,10 +1513,10 @@ interpreter to play with code samples shown.
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Dave Bayer, Elisa Firth, Marc Fontaine, Cale Gibbard, Stephen Hicks,
-  Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter,
-  Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner, and Jeff
-  Zaroyko.
+  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Cale Gibbard,
+  Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
+  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Leif
+  Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
