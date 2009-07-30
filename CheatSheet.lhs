@@ -765,10 +765,13 @@ interpreter to play with code samples shown.
   Haskell cannot compile that function because it does not know the type of @read x@.
   We must limit the type through an annotation:
 
-> canParseInt x = show ((read x) :: Int)
+> canParseInt x = show (read x :: Int)
 
-  Annotations have the same syntax as type signatures, but may adorn any
-  expression.
+  Annotations have the same syntax as type signatures, but may adorn
+  any expression. Note that the annotation above is on the expression
+  @read x@, not on the variable @x@. Only function application (e.g.,
+  @read x@) binds tighter than annotations. If that was not the case,
+  the above would need to be written @(read x) :: Int@.
 
 \shd{Unit}\label{unit}
 
@@ -915,8 +918,13 @@ interpreter to play with code samples shown.
 <   (/=) :: a -> a -> Bool
 <   (/=) a b = not (a == b)
 
-  Recursive definitions can be created, but an @instance@ declaration
-  must always implement at least one class member.
+  Recursive definitions can be created. Continuing the @Eq@ example, 
+  @==@ can be defined in terms of @/=@:
+
+<   (==) a b = not (a /= b)
+
+  However, if instances do not provide enough concrete implementations
+  of member functions then any program using those instances will loop.
 
 \shd{Data}\label{data}
 
@@ -1220,7 +1228,7 @@ interpreter to play with code samples shown.
 > listStats m =
 >   let numbers = [1,3 .. m]
 >       total = sum numbers
->       mid = mid = head (drop (m `div` 2)
+>       mid = head (drop (m `div` 2)
 >                        numbers)
 >   in "total: " ++ show total ++
 >      ", mid: " ++ show mid
@@ -1515,12 +1523,12 @@ interpreter to play with code samples shown.
   My thanks to those who contributed patches and useful suggestions:
   Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Cale Gibbard,
   Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
-  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Leif
-  Warner, and Jeff Zaroyko.
+  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Adam
+  Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 1.11. The source can be found at GitHub
+  This is version 2.0. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
