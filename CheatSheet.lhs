@@ -691,7 +691,7 @@ interpreter to play with code samples shown.
 
 < \c -> (c, c)
 
-  which defines a function which takes an argument and returns a tuple
+  which defines a function that takes an argument and returns a tuple
   containing that argument in both positions. They are useful for simple
   functions which don't need a name. The following determines if a string
   consists only of mixed case letters and whitespace.
