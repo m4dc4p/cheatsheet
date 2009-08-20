@@ -149,7 +149,7 @@ interpreter to play with code samples shown.
     \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
     \todo{Control characters, ascii codes such as NUL}
   \end{compactitem}
-  
+
 
 \shd{Numbers}\label{numbers}
 
@@ -169,7 +169,7 @@ interpreter to play with code samples shown.
   \item @[110..100]@ -- Empty list; ranges only go forwards.
   \item @[0, -1 ..]@ -- Negative integers.
   \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
-  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.  
+  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.
   \end{compactitem}
 
   \noindent In fact, any value which is in the @Enum@ class can be used:
@@ -918,7 +918,7 @@ interpreter to play with code samples shown.
 <   (/=) :: a -> a -> Bool
 <   (/=) a b = not (a == b)
 
-  Recursive definitions can be created. Continuing the @Eq@ example, 
+  Recursive definitions can be created. Continuing the @Eq@ example,
   @==@ can be defined in terms of @/=@:
 
 <   (==) a b = not (a /= b)
