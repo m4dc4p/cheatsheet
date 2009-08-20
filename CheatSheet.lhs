@@ -1252,8 +1252,9 @@ interpreter to play with code samples shown.
 > onlyThree str =
 >   let (a:b:c:[]) = str
 >   in "The characters given are: " ++
->       show a ++ ", " ++ show b ++
->       ", and " ++ show c
+>       show a ++ ", " ++
+>       show b ++ ", and " ++
+>       show c
 
 \shd{Of}
 
