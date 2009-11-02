@@ -166,7 +166,7 @@ interpreter to play with code samples shown.
   \begin{compactitem}
   \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
   \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
-  \item @[110..100]@ -- Empty list; ranges only go forwards.
+  \item @[110..100]@ -- Empty list, but @[110, 109 .. 100]@ will give a list from 110 to 100.
   \item @[0, -1 ..]@ -- Negative integers.
   \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
   \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.
@@ -176,6 +176,7 @@ interpreter to play with code samples shown.
 
   \begin{compactitem}
   \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
+  \item @['z', 'y' .. 'a']@ -- \texttt{z, y, x, {\ensuremath\mathellipsis}, a}.
   \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
   \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
   \end{compactitem}
