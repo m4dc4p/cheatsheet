@@ -145,7 +145,7 @@ interpreter to play with code samples shown.
   \sshd{Escape Codes} The following escape codes can be used in characters or strings:
   \begin{compactitem}
     \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
-    \item @\72@, @\x48@, \@o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
+    \item @\72@, @\x48@, @\o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
     \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
     \todo{Control characters, ascii codes such as NUL}
   \end{compactitem}
@@ -333,7 +333,7 @@ interpreter to play with code samples shown.
 >   | even n = "even!"
 >   | otherwise = "odd!"
 
-    Notice @otherwise@ -- it always evaluates to true and can be used to specify
+    Notice @otherwise@ -- it always evaluates to @True@ and can be used to specify
     a ``default'' branch.
 
     Guards can be used with patterns. Here is a function that determines if the
@@ -540,7 +540,7 @@ interpreter to play with code samples shown.
   syntax is:
 
 \bigskip
-  \texttt{infix} || \texttt{infixr} || \texttt{infixl} \emph{precedence} \emph{op}
+  \textbraceleft\texttt{infix} || \texttt{infixr} || \texttt{infixl}\textbraceright\ \emph{precedence op}
 \bigskip
 
   \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually
@@ -810,13 +810,11 @@ interpreter to play with code samples shown.
 
   \sshd{Nesting \& Capture}\label{nesting-capture}
 
-  Nested matching and binding are also allowed.
+  Nested matching and binding are also allowed. For example, here is the definition
+of the @Maybe@ type:
 
-\begin{figure}[H]
 < data Maybe a = Just a | Nothing
-\caption{The definition of @Maybe@}\label{maybe}
-\end{figure}
-\todo[colorize]{Change the background color or the border of this figure.}
+\label{maybe}
 
   Using @Maybe@ we can determine if any choice was given using a nested match:
 
@@ -912,7 +910,7 @@ interpreter to play with code samples shown.
   Default implementations can be given for functions in a class. These are
   useful when certain functions can be defined in terms of others in the class.
   A default is defined by giving a body to one of the member functions. The
-  canonical example is @Eq@, which defines @/=@ (not equal) in terms of @==@. :
+  canonical example is @Eq@, which defines @/=@ (not equal) in terms of @==@\ :
 
 < class Eq a where
 <   (==) :: a -> a -> Bool
@@ -1027,7 +1025,7 @@ interpreter to play with code samples shown.
   \sshd{Class Constraints}\label{class-constraints}
 
   Data types can be declared with class constraints on the type variables, but
-  this practice is generally discouraged. It is generally better to hide the
+  this practice is discouraged. It is better to hide the
   ``raw'' data constructors using the module system and instead export ``smart''
   constructors which apply appropriate constraints. In any case, the syntax used
   is:
@@ -1495,7 +1493,7 @@ interpreter to play with code samples shown.
 
 < type NotSure a b = Maybe a
 
-  Note that \emph{fewer} type variables can be used, which useful in certain
+  Note that \emph{fewer} type variables can be used, which is useful in certain
   instances.
 
 \shd{Where}\label{where}
