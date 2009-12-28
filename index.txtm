@@ -1,6 +1,6 @@
 % The Haskell Cheatsheet
 % Justin Bailey
-% June 25, 2009
+% December 27, 2009
 <div id="wrapper">
 <div id="masthead" class="fix" style="width: 100%">
 <h1 class="sans"><a href="http://blog.codeslower.com" class="title">codeslower.com</a> <em>Savor Your Code.</em></h1>
@@ -48,6 +48,10 @@ and can be cloned from
 Jaime Soffer was kind enough to translate the Haskell Cheatsheet into Spanish! Just download
 [CheatSheetEs.pdf](http://cloud.github.com/downloads/jsoffer/cheatsheet/CheatSheetEs.pdf) from his
 [GitHub repository](http://github.com/jsoffer/cheatsheet/downloads).
+
+<h1>Anata ha Nihongo wo hanashimasuka?</h1>
+
+Yuji Ichikawa has translated the Haskell Cheatsheet into Japanese. Download it now: [CheatSheet-ja.pdf](http://www.h3.dion.ne.jp/~y.ich/CheatSheet-ja.pdf).
 
 </div>
 </div>
