@@ -1,12 +1,12 @@
 Name:           CheatSheet
 License:        BSD3
 License-File:   LICENSE
-Version:        1.11
+Version:        2.0
 Homepage:       http://cheatsheet.codeslower.com
 Maintainer:     Justin Bailey <jgbailey@codeslower.com>
 Author:     Justin Bailey <jgbailey@codeslower.com>
 Category:       Help
-Build-Depends:  base, containers, directory
+Build-Depends:  base >=3 && < 5, containers, directory
 Build-type: Simple
 Synopsis:       A Haskell cheat sheet in PDF and literate formats.
 Description:

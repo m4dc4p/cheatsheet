@@ -5,7 +5,7 @@ dist
 *.exe
 
 # The output of lhs2TeX
-*.tex
+CheatSheet.tex
 
 # Various temporary files from LaTeX
 *.aux

@@ -116,7 +116,7 @@ interpreter to play with code samples shown.
 
   \sshd{Multi-line Strings}\label{multi-line-strings}
 
-  Normally, it is a syntax error if a string has any actual newline characters.
+  Normally, it is a syntax error if a string has any newline characters.
   That is, this is a syntax error:
 
 < string1 = "My long
@@ -142,14 +142,23 @@ interpreter to play with code samples shown.
 < My long
 < string.
 
+  \sshd{Escape Codes} The following escape codes can be used in characters or strings:
+  \begin{compactitem}
+    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
+    \item @\72@, @\x48@, @\o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
+    \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
+    \todo{Control characters, ascii codes such as NUL}
+  \end{compactitem}
+
+
 \shd{Numbers}\label{numbers}
 
   \begin{compactitem}
-  \item @1@ -- Integer or Floating point
-  \item @1.0, 1e10@ -- Floating point
-  \item @1.@ -- syntax error
-  \item @-1@ -- sugar for @(negate 1)@
-  \item @2-1@ -- sugar for @((-) 2 1)@
+  \item @1@ -- Integer or floating point value.
+  \item @1.0, 1e10@ -- Floating point value.
+  \item @0o1, 0O1@ -- Octal value.
+  \item @0x1, 0X1@ -- Hexadecimal value.
+ \item  @-1@ -- Negative number; the minus sign (``@-@'') cannot be separated from the number.
   \end{compactitem}
 
 \shd{Enumerations}\label{enumerations}
@@ -157,16 +166,17 @@ interpreter to play with code samples shown.
   \begin{compactitem}
   \item @[1..10]@ -- List of numbers -- \texttt{1, 2, {\ensuremath\mathellipsis}, 10}.
   \item @[100..]@ -- Infinite list of numbers -- \texttt{100, 101, 102, {\ensuremath\mathellipsis}\ }.
-  \item @[110..100]@ -- Empty list; ranges only go forwards.
+  \item @[110..100]@ -- Empty list, but @[110, 109 .. 100]@ will give a list from 110 to 100.
   \item @[0, -1 ..]@ -- Negative integers.
-  \item @[-100..-110]@ -- Syntax error; need @[-100.. -110]@ for negatives.
-  \item @[1,3..100], [-1,3..100]@ -- List from 1 to 100 by 2, -1 to 100 by 4.
+  \item @[-110..-100]@ -- Syntax error; need @[-110.. -100]@ for negatives.
+  \item @[1,3..99], [-1,3..99]@ -- List from 1 to 99 by 2, -1 to 99 by 4.
   \end{compactitem}
 
   \noindent In fact, any value which is in the @Enum@ class can be used:
 
   \begin{compactitem}
   \item @['a' .. 'z']@ -- List of characters -- \texttt{a, b, {\ensuremath\mathellipsis}, z}.
+  \item @['z', 'y' .. 'a']@ -- \texttt{z, y, x, {\ensuremath\mathellipsis}, a}.
   \item @[1.0, 1.5 .. 2]@ -- @[1.0,1.5,2.0]@.
   \item @[UppercaseLetter ..]@ -- List of @GeneralCategory@ values (from @Data.Char@).
   \end{compactitem}
@@ -233,6 +243,542 @@ interpreter to play with code samples shown.
   @let@. Finally, when multiple definitions are given, all identifiers must
   appear in the same column.
 
+\hd{Declarations, Etc.}\label{declarations}
+
+  The following section details rules on function declarations, list
+  comprehensions, and other areas of the language.
+
+\shd{Function Definition}\label{function-definition}
+
+  Functions are defined by declaring their name, any arguments, and an equals
+  sign:
+
+> square x = x * x
+
+  \emph{All} functions names must start with a lowercase letter or ``@_@''. It
+  is a syntax error otherwise.
+
+  \sshd{Pattern Matching}\label{pattern-matching}
+
+  Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
+  the values of arguments. Here, the the @agree@ function has four separate
+  cases:
+
+> -- Matches when the string "y" is given.
+> agree1 "y" = "Great!"
+> -- Matches when the string "n" is given.
+> agree1 "n" = "Too bad."
+> -- Matches when string beginning
+> -- with 'y' given.
+> agree1 ('y':_) = "YAHOO!"
+> -- Matches for any other value given.
+> agree1 _ = "SO SAD."
+
+  Note that the `@_@' character is a wildcard and matches any value.
+
+  Pattern matching can extend to nested values. Assuming this data declaration:
+
+< data Bar = Bil (Maybe Int) | Baz
+
+  \noindent and recalling the \hyperref[maybe]{definition of @Maybe@} from
+  page~\pageref{maybe} we can match on nested @Maybe@ values when @Bil@ is
+  present:
+
+< f (Bil (Just _)) = ...
+< f (Bil Nothing) = ...
+< f Baz = ...
+
+  Pattern-matching also allows values to be assigned to variables. For example,
+  this function determines if the string given is empty or not. If not, the
+  value bound to @str@ is converted to lower case:
+
+> toLowerStr [] = []
+> toLowerStr str = map toLower str
+
+  Note that @str@ above is similer to @_@ in that it will match anything; the
+  only difference is that the value matched is also given a name.
+
+  \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
+
+  This (sometimes controversial) pattern-matching facility makes it easy to match
+  certain kinds of numeric expressions. The idea is to define a base case (the
+  ``$n$'' portion) with a constant number for matching, and then to define other
+  matches (the ``$k$'' portion) as additives to the base case. Here is a rather
+  inefficient way of testing if a number is even or not:
+
+> isEven 0 = True
+> isEven 1 = False
+> isEven (n + 2) = isEven n
+
+  \sshd{Argument Capture}\label{argument-capture}
+
+  Argument capture is useful for pattern-matching a value \emph{and} using it,
+  without declaring an extra variable. Use an `|@|' symbol in between the
+  pattern to match and the variable to bind the value to. This facility is
+  used below to bind the head of the list in @l@ for display, while also
+  binding the entire list to @ls@ in order to compute its length:
+
+> len ls@(l:_) = "List starts with " ++
+>   show l ++ " and is " ++
+>   show (length ls) ++ " items long."
+> len [] = "List is empty!"
+
+  \sshd{Guards}\label{function-guards}
+
+  Boolean functions can be used as ``guards'' in function definitions along with
+  pattern matching. An example without pattern matching:
+
+> which n
+>   | n == 0 = "zero!"
+>   | even n = "even!"
+>   | otherwise = "odd!"
+
+    Notice @otherwise@ -- it always evaluates to @True@ and can be used to specify
+    a ``default'' branch.
+
+    Guards can be used with patterns. Here is a function that determines if the
+    first character in a string is upper or lower case:
+
+> what [] = "empty string!"
+> what (c:_)
+>   | isUpper c = "upper case!"
+>   | isLower c = "lower case"
+>   | otherwise = "not a letter!"
+
+  \sshd{Matching \& Guard Order}\label{function-matching-order}
+
+  Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
+  are tested from top to bottom. For example, neither of these functions would
+  be very interesting:
+
+> allEmpty _ = False
+> allEmpty [] = True
+>
+> alwaysEven n
+>   | otherwise = False
+>   | n `div` 2 == 0 = True
+
+  \sshd{Record Syntax}\label{matching-record-syntax}
+
+  Normally pattern matching occurs based on the position of arguments in the
+  value being matched. Types declared with record syntax, however, can match
+  based on those record names. Given this data type:
+
+> data Color = C { red
+>   , green
+>   , blue :: Int }
+
+\begin{comment}
+
+>   deriving (Show, Eq)
+
+\end{comment}
+
+  \noindent we can match on @green@ only:
+
+> isGreenZero (C { green = 0 }) = True
+> isGreenZero _ = False
+
+  Argument capture is possible with this syntax, although it gets clunky.
+  Continuing the above, we now define a @Pixel@ type and a function to replace
+  values with non-zero @green@ components with all black:
+
+> data Pixel = P Color
+
+\begin{comment}
+
+>   deriving (Show, Eq)
+
+\end{comment}
+
+> -- Color value untouched if green is 0
+> setGreen (P col@(C { green = 0 })) = P col
+> setGreen _ = P (C 0 0 0)
+
+  \sshd{Lazy Patterns}\label{lazy-patterns}
+
+  This syntax, also known as \emph{irrefutable} patterns, allows pattern matches
+  which always succeed. That means any clause using the pattern will succeed,
+  but if it tries to actually use the matched value an error may occur. This is
+  generally useful when an action should be taken on the \emph{type} of a
+  particular value, even if the value isn't present.
+
+  For example, define a class for default values:
+
+> class Def a where
+>   defValue :: a -> a
+
+  The idea is you give @defValue@ a value of the right type and it gives you
+  back a default value for that type. Defining instances for basic types is
+  easy:
+
+> instance Def Bool where
+>   defValue _ = False
+>
+> instance Def Char where
+>   defValue _ = ' '
+
+  @Maybe@ is a littler trickier, because we want to get a default value for the
+  type, but the constructor might be @Nothing@. The following definition would
+  work, but it's not optimal since we get @Nothing@ when @Nothing@ is passed in.
+
+< instance Def a => Def (Maybe a) where
+<   defValue (Just x) = Just (defValue x)
+<   defValue Nothing = Nothing
+
+  We'd rather get a {\tt Just (\rm\emph{default value}\tt)\rm} back instead.
+  Here is where a lazy pattern saves us -- we can pretend that we've matched
+  @Just x@ and use that to get a default value, even if @Nothing@ is given:
+
+> instance Def a => Def (Maybe a) where
+>   defValue ~(Just x) = Just (defValue x)
+
+  As long as the value @x@ is not actually evaluated, we're safe. None of the
+  base types need to look at @x@ (see the ``@_@'' matches they use), so things
+  will work just fine.
+
+  One wrinkle with the above is that we must provide type annotations in the
+  interpreter or the code when using a @Nothing@ constructor. @Nothing@ has type
+  @Maybe a@ but, if not enough other information is available, Haskell must be
+  told what @a@ is. Some example default values:
+
+> -- Return "Just False"
+> defMB = defValue (Nothing :: Maybe Bool)
+> -- Return "Just ' '"
+> defMC = defValue (Nothing :: Maybe Char)
+
+\shd{List Comprehensions}\label{list-comprehensions}
+
+  A list comprehension consists of four types of elements: \emph{generators},
+  \emph{guards}, \emph{local bindings}, and \emph{targets}. A list comprehension
+  creates a list of target values based on the generators and guards given. This
+  comprehension generates all squares:
+
+> squares = [x * x | x <- [1..]]
+
+  @x <- [1..]@ generates a list of all @Integer@ values and puts them in @x@,
+  one by one. @x * x@ creates each element of the list by multiplying @x@ by
+  itself.
+
+  Guards allow certain elements to be excluded. The following shows how divisors
+  for a given number (excluding itself) can be calculated. Notice how @d@ is
+  used in both the guard and target expression.
+
+> divisors n =
+>   [d | d <- [1..(n `div` 2)]
+>      , n `mod` d == 0]
+
+  Local bindings provide new definitions for use in the generated expression or
+  subsequent generators and guards. Below, @z@ is used to represent the minimum
+  of @a@ and @b@:
+
+> strange = [(a,z) | a <-[1..3]
+>                  , b <-[1..3]
+>                  , c <- [1..3]
+>                  , let z = min a b
+>                  , z < c ]
+
+  Comprehensions are not limited to numbers. Any list will do. All upper case
+  letters can be generated:
+
+> ups =
+>   [c | c <- [minBound .. maxBound]
+>      , isUpper c]
+
+  Or, to find all occurrences of a particular break value @br@ in a list @word@
+  (indexing from 0):
+
+> idxs word br =
+>   [i | (i, c) <- zip [0..] word
+>       , c == br]
+
+  A unique feature of list comprehensions is that pattern matching failures do
+  not cause an error; they are just excluded from the resulting list.
+
+\shd{Operators}\label{operators}
+
+  There are very few predefined ``operators'' in Haskell---most that appear
+  predefined are actually syntax (e.g., ``@=@''). Instead, operators are simply
+  functions that take two arguments and have special syntactic support. Any
+  so-called operator can be applied as a prefix function using parentheses:
+
+< 3 + 4 == (+) 3 4
+
+  To define a new operator, simply define it as a normal function, except the
+  operator appears between the two arguments. Here's one which inserts a
+  comma between two strings and ensures no extra spaces appear:
+
+> first ## last =
+>   let trim s = dropWhile isSpace
+>         (reverse (dropWhile isSpace
+>           (reverse s)))
+>   in trim last ++ ", " ++ trim first
+
+< > "  Haskell " ## " Curry "
+< Curry, Haskell
+
+  Of course, full pattern matching, guards, etc. are available in this form.
+  Type signatures are a bit different, though. The operator ``name'' must appear
+  in parentheses:
+
+> (##) :: String -> String -> String
+
+  Allowable symbols which can be used to define operators are:
+
+< # $ % & * + . / < = > ? @ \ ^ | - ~
+
+  However, there are several ``operators'' which cannot be redefined. They are:
+  @<-@, @->@ and @=@. The last, @=@, cannot be redefined by itself, but can be
+  used as part of multi-character operator. The ``bind'' function, @>>=@, is one
+  example.
+
+  \sshd{Precedence \& Associativity}\label{fixity}
+
+  The precedence and associativity, collectively called \emph{fixity}, of any
+  operator can be set through the @infix@, @infixr@ and @infixl@ keywords. These
+  can be applied both to top-level functions and to local definitions. The
+  syntax is:
+
+\bigskip
+  \textbraceleft\texttt{infix} || \texttt{infixr} || \texttt{infixl}\textbraceright\ \emph{precedence op}
+\bigskip
+
+  \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually
+  be any function which takes two arguments (i.e., any binary operation).
+  Whether the operator is left or right associative is specified by @infixl@ or
+  @infixr@, respectively. Such @infix@ declarations have no associativity.
+
+  Precedence and associativity make many of the rules of arithmetic work ``as
+  expected.'' For example, consider these minor updates to the precedence of
+  addition and multiplication:
+
+> infixl 8 `plus1`
+> plus1 a b = a + b
+> infixl 7 `mult1`
+> mult1 a b = a * b
+
+  The results are surprising:
+
+< > 2 + 3 * 5
+< 17
+< > 2 `plus1` 3 `mult1` 5
+< 25
+
+  Reversing associativity also has interesting effects. Redefining division as
+  right associative:
+
+> infixr 7 `div1`
+> div1 a b = a / b
+
+  We get interesting results:
+
+< > 20 / 2 / 2
+< 5.0
+< > 20 `div1` 2 `div1` 2
+< 20.0
+
+\shd{Currying}\label{currying}
+
+ In Haskell, functions do not have to get all of their arguments at once. For
+ example, consider the @convertOnly@ function, which only converts certain
+ elements of string depending on a test:
+
+> convertOnly test change str =
+>     map (\c -> if test c
+>                 then change c
+>                 else c) str
+
+ Using @convertOnly@, we can write the @l33t@ function which converts certain
+ letters to numbers:
+
+> l33t = convertOnly isL33t toL33t
+>   where
+>     isL33t 'o' = True
+>     isL33t 'a' = True
+>     -- etc.
+>     isL33t _ = False
+>     toL33t 'o' = '0'
+>     toL33t 'a' = '4'
+>     -- etc.
+>     toL33t c = c
+
+ Notice that @l33t@ has no arguments specified. Also, the final argument to
+ @convertOnly@ is not given. However, the type signature of @l33t@ tells the
+ whole story:
+
+< l33t :: String -> String
+
+ That is, @l33t@ takes a string and produces a string. It is a ``constant'', in
+ the sense that @l33t@ always returns a value that is a function which takes a
+ string and produces a string. @l33t@ returns a ``curried'' form of
+ @convertOnly@, where only two of its three arguments have been supplied.
+
+ This can be taken further. Say we want to write a function which only changes
+ upper case letters. We know the test to apply, @isUpper@, but we don't want to
+ specify the conversion. That function can be written as:
+
+> convertUpper = convertOnly isUpper
+
+ which has the type signature:
+
+< convertUpper :: (Char -> Char)
+<   -> String -> String
+
+ That is, @convertUpper@ can take two arguments. The first is the conversion
+ function which converts individual characters and the second is the string to
+ be converted.
+
+ A curried form of any function which takes multiple arguments can be created.
+ One way to think of this is that each ``arrow'' in the function's signature
+ represents a new function which can be created by supplying one more argument.
+
+ \sshd{Sections}\label{sections}
+
+ Operators are functions, and they can be curried like any other. For example, a
+ curried version of ``@+@'' can be written as:
+
+< add10 = (+) 10
+
+ However, this can be unwieldy and hard to read. ``Sections'' are curried
+ operators, using parentheses. Here is @add10@ using sections:
+
+> add10 = (10 +)
+
+ The supplied argument can be on the right or left, which indicates what
+ position it should take. This is important for operations such as
+ concatenation:
+
+> onLeft str = (++ str)
+> onRight str = (str ++)
+
+ Which produces quite different results:
+
+< > onLeft "foo" "bar"
+< "barfoo"
+< > onRight "foo" "bar"
+< "foobar"
+
+\shd{``Updating'' values and record syntax}\label{updating}
+
+  Haskell is a pure language and, as such, has no mutable state. That is, once a
+  value is set it never changes. ``Updating'' is really a copy operation, with
+  new values in the fields that ``changed.'' For example, using the @Color@ type
+  defined earlier, we can write a function that sets the @green@ field to zero
+  easily:
+
+> noGreen1 (C r _ b) = C r 0 b
+
+  The above is a bit verbose and can be rewriten using record syntax. This kind
+  of ``update'' only sets values for the field(s) specified and copies the rest:
+
+> noGreen2 c = c { green = 0 }
+
+  Here we capture the @Color@ value in @c@ and return a new @Color@ value.  That
+  value happens to have the same value for @red@ and @blue@ as @c@ and it's
+  @green@ component is 0. We can combine this with pattern matching to set the
+  @green@ and @blue@ fields to equal the @red@ field:
+
+> makeGrey c@(C { red = r }) =
+>   c { green = r, blue = r }
+
+  Notice we must use argument capture (``|c@|'') to get the @Color@ value and
+  pattern matching with record syntax (``|C { red = r}|'') to get the inner
+  @red@ field.
+
+\shd{Anonymous Functions}\label{anonymous-functions}
+
+  An anonymous function (i.e., a \emph{lambda expression} or \emph{lambda} for
+  short), is a function without a name. They can be defined at any time like so:
+
+< \c -> (c, c)
+
+  which defines a function that takes an argument and returns a tuple
+  containing that argument in both positions. They are useful for simple
+  functions which don't need a name. The following determines if a string
+  consists only of mixed case letters and whitespace.
+
+> mixedCase str =
+>   all (\c -> isSpace c ||
+>              isLower c ||
+>              isUpper c) str
+
+  Of course, lambdas can be the returned from functions too. This classic
+  returns a function which will then multiply its argument by the one originally
+  given:
+
+> multBy n = \m -> n * m
+
+  For example:
+
+< > let mult10 = multBy 10
+< > mult10 10
+< 100
+
+\shd{Type Signatures}\label{type-signatures}
+
+  Haskell supports full type inference, meaning in most cases no types have to
+  be written down. Type signatures are still useful for at least two reasons.
+
+  \begin{description}
+  \item{\emph{Documentation}}---Even if the compiler can figure out the types
+  of your functions, other programmers or even yourself might not be able to
+  later. Writing the type signatures on all top-level functions is considered
+  very good form.
+
+  \item{\emph{Specialization}}---Typeclasses allow functions with overloading.
+  For example, a function to negate any list of numbers has the signature:
+
+< negateAll :: Num a => [a] -> [a]
+
+  However, for efficiency or other reasons you may only want to allow @Int@
+  types. You would accomplish that with a type signature:
+
+< negateAll :: [Int] -> [Int]
+  \end{description}
+
+  Type signatures can appear on top-level functions and nested @let@ or @where@
+  definitions. Generally this is useful for documentation, although in some
+  cases they are needed to prevent polymorphism. A type signature is first the
+  name of the item which will be typed, followed by a @::@, followed by the
+  types. An example of this has already been seen above.
+
+  Type signatures do not need to appear directly above their implementation.
+  They can be specified anywhere in the containing module (yes, even below!).
+  Multiple items with the same signature can also be defined together:
+
+> pos, neg :: Int -> Int
+
+< ...
+
+> pos x | x < 0 = negate x
+>       | otherwise = x
+>
+> neg y | y > 0 = negate y
+>       | otherwise = y
+
+  \sshd{Type Annotations}\label{type-annotations}
+
+  Sometimes Haskell cannot determine what type is meant. The classic
+  demonstration of this is the so-called ``@show . read@'' problem:
+
+< canParseInt x = show (read x)
+
+  Haskell cannot compile that function because it does not know the type of @read x@.
+  We must limit the type through an annotation:
+
+> canParseInt x = show (read x :: Int)
+
+  Annotations have the same syntax as type signatures, but may adorn
+  any expression. Note that the annotation above is on the expression
+  @read x@, not on the variable @x@. Only function application (e.g.,
+  @read x@) binds tighter than annotations. If that was not the case,
+  the above would need to be written @(read x) :: Int@.
+
+\shd{Unit}\label{unit}
+
+  @()@ -- ``unit'' type and ``unit'' value. The value and type that represents
+  no useful information.
+
 \hd{Keywords}\label{keywords}
 
   Haskell keywords are listed below, in alphabetical order.
@@ -264,13 +810,11 @@ interpreter to play with code samples shown.
 
   \sshd{Nesting \& Capture}\label{nesting-capture}
 
-  Nested matching and binding are also allowed.
+  Nested matching and binding are also allowed. For example, here is the definition
+of the @Maybe@ type:
 
-\begin{figure}[H]
 < data Maybe a = Just a | Nothing
-\caption{The definition of @Maybe@}\label{maybe}
-\end{figure}
-\todo[colorize]{Change the background color or the border of this figure.}
+\label{maybe}
 
   Using @Maybe@ we can determine if any choice was given using a nested match:
 
@@ -366,15 +910,20 @@ interpreter to play with code samples shown.
   Default implementations can be given for functions in a class. These are
   useful when certain functions can be defined in terms of others in the class.
   A default is defined by giving a body to one of the member functions. The
-  canonical example is @Eq@, which defines @/=@ (not equal) in terms of @==@. :
+  canonical example is @Eq@, which defines @/=@ (not equal) in terms of @==@\ :
 
 < class Eq a where
 <   (==) :: a -> a -> Bool
 <   (/=) :: a -> a -> Bool
 <   (/=) a b = not (a == b)
 
-  Recursive definitions can be created, but an @instance@ declaration
-  must always implement at least one class member.
+  Recursive definitions can be created. Continuing the @Eq@ example,
+  @==@ can be defined in terms of @/=@:
+
+<   (==) a b = not (a /= b)
+
+  However, if instances do not provide enough concrete implementations
+  of member functions then any program using those instances will loop.
 
 \shd{Data}\label{data}
 
@@ -476,7 +1025,7 @@ interpreter to play with code samples shown.
   \sshd{Class Constraints}\label{class-constraints}
 
   Data types can be declared with class constraints on the type variables, but
-  this practice is generally discouraged. It is generally better to hide the
+  this practice is discouraged. It is better to hide the
   ``raw'' data constructors using the module system and instead export ``smart''
   constructors which apply appropriate constraints. In any case, the syntax used
   is:
@@ -678,7 +1227,7 @@ interpreter to play with code samples shown.
 > listStats m =
 >   let numbers = [1,3 .. m]
 >       total = sum numbers
->       mid = head (take (m `div` 2)
+>       mid = head (drop (m `div` 2)
 >                        numbers)
 >   in "total: " ++ show total ++
 >      ", mid: " ++ show mid
@@ -697,13 +1246,14 @@ interpreter to play with code samples shown.
 >       show c
 
   Note that this is different than the following, which only works if the string
-  has three characters:
+  has exactly three characters:
 
 > onlyThree str =
 >   let (a:b:c:[]) = str
 >   in "The characters given are: " ++
->       show a ++ ", " ++ show b ++
->       ", and " ++ show c
+>       show a ++ ", " ++
+>       show b ++ ", and " ++
+>       show c
 
 \shd{Of}
 
@@ -731,7 +1281,7 @@ interpreter to play with code samples shown.
 
   The Haskell standard libraries are divided into a number of modules. The
   functionality provided by those libraries is accessed by importing into your
-  source file. To import all everything exported by a library, just use the
+  source file. To import everything exported by a library, just use the
   module name:
 
 < import Text.Read
@@ -943,7 +1493,7 @@ interpreter to play with code samples shown.
 
 < type NotSure a b = Maybe a
 
-  Note that \emph{fewer} type variables can be used, which useful in certain
+  Note that \emph{fewer} type variables can be used, which is useful in certain
   instances.
 
 \shd{Where}\label{where}
@@ -968,550 +1518,17 @@ interpreter to play with code samples shown.
   extends over all guards. In contrast, the scope of a @let@ expression is only
   the current function clause \emph{and} guard, if any.
 
-\hd{Declarations, Etc.}\label{declarations}
-
-  The following section details rules on function declarations, list
-  comprehensions, and other areas of the language.
-
-\shd{Function Definition}\label{function-definition}
-
-  Functions are defined by declaring their name, any arguments, and an equals
-  sign:
-
-> square x = x * x
-
-  \emph{All} functions names must start with a lowercase letter or ``@_@''. It
-  is a syntax error otherwise.
-
-  \sshd{Pattern Matching}\label{pattern-matching}
-
-  Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
-  the values of arguments. Here, the the @agree@ function has four separate
-  cases:
-
-> -- Matches when the string "y" is given.
-> agree1 "y" = "Great!"
-> -- Matches when the string "n" is given.
-> agree1 "n" = "Too bad."
-> -- Matches when string beginning
-> -- with 'y' given.
-> agree1 ('y':_) = "YAHOO!"
-> -- Matches for any other value given.
-> agree1 _ = "SO SAD."
-
-  Note that the `@_@' character is a wildcard and matches any value.
-
-  Pattern matching can extend to nested values. Assuming this data declaration:
-
-< data Bar = Bil (Maybe Int) | Baz
-
-  \noindent and recalling the \hyperref[maybe]{definition of @Maybe@} from
-  page~\pageref{maybe} we can match on nested @Maybe@ values when @Bil@ is
-  present:
-
-< f (Bil (Just _)) = ...
-< f (Bil Nothing) = ...
-< f Baz = ...
-
-  Pattern-matching also allows values to be assigned to variables. For example,
-  this function determines if the string given is empty or not. If not, the
-  value bound to @str@ is converted to lower case:
-
-> toLowerStr [] = []
-> toLowerStr str = map toLower str
-
-  Note that @str@ above is similer to @_@ in that it will match anything; the
-  only difference is that the value matched is also given a name.
-
-  \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
-
-  This (sometimes controversial) pattern-matching facility makes it easy to match
-  certain kinds of numeric expressions. The idea is to define a base case (the
-  ``$n$'' portion) with a constant number for matching, and then to define other
-  matches (the ``$k$'' portion) as additives to the base case. Here is a rather
-  inefficient way of testing if a number is even or not:
-
-> isEven 0 = True
-> isEven 1 = False
-> isEven (n + 2) = isEven n
-
-  \sshd{Argument Capture}\label{argument-capture}
-
-  Argument capture is useful for pattern-matching a value \emph{and} using it,
-  without declaring an extra variable. Use an `|@|' symbol in between the
-  pattern to match and the variable to bind the value to. This facility is
-  used below to bind the head of the list in @l@ for display, while also
-  binding the entire list to @ls@ in order to compute its length:
-
-> len ls@(l:_) = "List starts with " ++
->   show l ++ " and is " ++
->   show (length ls) ++ " items long."
-> len [] = "List is empty!"
-
-  \sshd{Guards}\label{function-guards}
-
-  Boolean functions can be used as ``guards'' in function definitions along with
-  pattern matching. An example without pattern matching:
-
-> which n
->   | n == 0 = "zero!"
->   | even n = "even!"
->   | otherwise = "odd!"
-
-    Notice @otherwise@ -- it always evaluates to true and can be used to specify
-    a ``default'' branch.
-
-    Guards can be used with patterns. Here is a function that determines if the
-    first character in a string is upper or lower case:
-
-> what [] = "empty string!"
-> what (c:_)
->   | isUpper c = "upper case!"
->   | isLower c = "lower case"
->   | otherwise = "not a letter!"
-
-  \sshd{Matching \& Guard Order}\label{function-matching-order}
-
-  Pattern-matching proceeds in top to bottom order. Similarly, guard expressions
-  are tested from top to bottom. For example, neither of these functions would
-  be very interesting:
-
-> allEmpty _ = False
-> allEmpty [] = True
->
-> alwaysEven n
->   | otherwise = False
->   | n `div` 2 == 0 = True
-
-  \sshd{Record Syntax}\label{matching-record-syntax}
-
-  Normally pattern matching occurs based on the position of arguments in the
-  value being matched. Types declared with record syntax, however, can match
-  based on those record names. Given this data type:
-
-> data Color = C { red
->   , green
->   , blue :: Int }
-
-\begin{comment}
-
->   deriving (Show, Eq)
-
-\end{comment}
-
-  \noindent we can match on @green@ only:
-
-> isGreenZero (C { green = 0 }) = True
-> isGreenZero _ = False
-
-  Argument capture is possible with this syntax, although it gets clunky.
-  Continuing the above, we now define a @Pixel@ type and a function to replace
-  values with non-zero @green@ components with all black:
-
-> data Pixel = P Color
-
-\begin{comment}
-
->   deriving (Show, Eq)
-
-\end{comment}
-
-> -- Color value untouched if green is 0
-> setGreen (P col@(C { green = 0 })) = P col
-> setGreen _ = P (C 0 0 0)
-
-  \sshd{Lazy Patterns}\label{lazy-patterns}
-
-  This syntax, also known as \emph{irrefutable} patterns, allows pattern matches
-  which always succeed. That means any clause using the pattern will succeed,
-  but if it tries to actually use the matched value an error may occur. This is
-  generally useful when an action should be taken on the \emph{type} of a
-  particular value, even if the value isn't present.
-
-  For example, define a class for default values:
-
-> class Def a where
->   defValue :: a -> a
-
-  The idea is you give @defValue@ a value of the right type and it gives you
-  back a default value for that type. Defining instances for basic types is
-  easy:
-
-> instance Def Bool where
->   defValue _ = False
->
-> instance Def Char where
->   defValue _ = ' '
-
-  @Maybe@ is a littler trickier, because we want to get a default value for the
-  type, but the constructor might be @Nothing@. The following definition would
-  work, but it's not optimal since we get @Nothing@ when @Nothing@ is passed in.
-
-< instance Def a => Def (Maybe a) where
-<   defValue (Just x) = Just (defValue x)
-<   defValue Nothing = Nothing
-
-  We'd rather get a {\tt Just (\rm\emph{default value}\tt)\rm} back instead.
-  Here is where a lazy pattern saves us -- we can pretend that we've matched
-  @Just x@ and use that to get a default value, even if @Nothing@ is given:
-
-> instance Def a => Def (Maybe a) where
->   defValue ~(Just x) = Just (defValue x)
-
-  As long as the value @x@ is not actually evaluated, we're safe. None of the
-  base types need to look at @x@ (see the ``@_@'' matches they use), so things
-  will work just fine.
-
-  One wrinkle with the above is that we must provide type annotations in the
-  interpreter or the code when using a @Nothing@ constructor. @Nothing@ has type
-  @Maybe a@ but, if not enough other information is available, Haskell must be
-  told what @a@ is. Some example default values:
-
-> -- Return "Just False"
-> defMB = defValue (Nothing :: Maybe Bool)
-> -- Return "Just ' '"
-> defMC = defValue (Nothing :: Maybe Char)
-
-\shd{List Comprehensions}\label{list-comprehensions}
-
-  A list comprehension consists of four types of elements: \emph{generators},
-  \emph{guards}, \emph{local bindings}, and \emph{targets}. A list comprehension
-  creates a list of target values based on the generators and guards given. This
-  comprehension generates all squares:
-
-> squares = [x * x | x <- [1..]]
-
-  @x <- [1..]@ generates a list of all @Integer@ values and puts them in @x@,
-  one by one. @x * x@ creates each element of the list by multiplying @x@ by
-  itself.
-
-  Guards allow certain elements to be excluded. The following shows how divisors
-  for a given number (excluding itself) can be calculated. Notice how @d@ is
-  used in both the guard and target expression.
-
-> divisors n =
->   [d | d <- [1..(n `div` 2)]
->      , n `mod` d == 0]
-
-  Local bindings provide new definitions for use in the generated expression or
-  subsequent generators and guards. Below, @z@ is used to represent the minimum
-  of @a@ and @b@:
-
-> strange = [(a,z) | a <-[1..3]
->                  , b <-[1..3]
->                  , c <- [1..3]
->                  , let z = min a b
->                  , z < c ]
-
-  Comprehensions are not limited to numbers. Any list will do. All upper case
-  letters can be generated:
-
-> ups =
->   [c | c <- [minBound .. maxBound]
->      , isUpper c]
-
-  Or, to find all occurrences of a particular break value @br@ in a list @word@
-  (indexing from 0):
-
-> idxs word br =
->   [i | (i, c) <- zip [0..] word
->       , c == br]
-
-  A unique feature of list comprehensions is that pattern matching failures do
-  not cause an error; they are just excluded from the resulting list.
-
-\shd{Operators}\label{operators}
-
-  There are very few predefined ``operators'' in Haskell---most that appear
-  predefined are actually syntax (e.g., ``@=@''). Instead, operators are simply
-  functions that take two arguments and have special syntactic support. Any
-  so-called operator can be applied as a prefix function using parentheses:
-
-< 3 + 4 == (+) 3 4
-
-  To define a new operator, simply define it as a normal function, except the
-  operator appears between the two arguments. Here's one which takes inserts a
-  comma between two strings and ensures no extra spaces appear:
-
-> first ## last =
->   let trim s = dropWhile isSpace
->         (reverse (dropWhile isSpace
->           (reverse s)))
->   in trim last ++ ", " ++ trim first
-
-< > "  Haskell " ## " Curry "
-< Curry, Haskell
-
-  Of course, full pattern matching, guards, etc. are available in this form.
-  Type signatures are a bit different, though. The operator ``name'' must appear
-  in parentheses:
-
-> (##) :: String -> String -> String
-
-  Allowable symbols which can be used to define operators are:
-
-< # $ % & * + . / < = > ? @ \ ^ | - ~
-
-  However, there are several ``operators'' which cannot be redefined. They are:
-  @<-@, @->@ and @=@. The last, @=@, cannot be redefined by itself, but can be
-  used as part of multi-character operator. The ``bind'' function, @>>=@, is one
-  example.
-
-  \sshd{Precedence \& Associativity}\label{fixity}
-
-  The precedence and associativity, collectively called \emph{fixity}, of any
-  operator can be set through the @infix@, @infixr@ and @infixl@ keywords. These
-  can be applied both to top-level functions and to local definitions. The
-  syntax is:
-
-\bigskip
-  \texttt{infix} || \texttt{infixr} || \texttt{infixl} \emph{precedence} \emph{op}
-\bigskip
-
-  \noindent where \emph{precedence} varies from 0 to 9. \emph{Op} can actually
-  be any function which takes two arguments (i.e., any binary operation).
-  Whether the operator is left or right associative is specified by @infixl@ or
-  @infixr@, respectively. Such @infix@ declarations have no associativity.
-
-  Precedence and associativity make many of the rules of arithmetic work ``as
-  expected.'' For example, consider these minor updates to the precedence of
-  addition and multiplication:
-
-> infixl 8 `plus1`
-> plus1 a b = a + b
-> infixl 7 `mult1`
-> mult1 a b = a * b
-
-  The results are surprising:
-
-< > 2 + 3 * 5
-< 17
-< > 2 `plus1` 3 `mult1` 5
-< 25
-
-  Reversing associativity also has interesting effects. Redefining division as
-  right associative:
-
-> infixr 7 `div1`
-> div1 a b = a / b
-
-  We get interesting results:
-
-< > 20 / 2 / 2
-< 5.0
-< > 20 `div1` 2 `div1` 2
-< 20.0
-
-\shd{Currying}\label{currying}
-
- In Haskell, functions do not have to get all of their arguments at once. For
- example, consider the @convertOnly@ function, which only converts certain
- elements of string depending on a test:
-
-> convertOnly test change str =
->     map (\c -> if test c
->                 then change c
->                 else c) str
-
- Using @convertOnly@, we can write the @l33t@ function which converts certain
- letters to numbers:
-
-> l33t = convertOnly isL33t toL33t
->   where
->     isL33t 'o' = True
->     isL33t 'a' = True
->     -- etc.
->     isL33t _ = False
->     toL33t 'o' = '0'
->     toL33t 'a' = '4'
->     -- etc.
->     toL33t c = c
-
- Notice that @l33t@ has no arguments specified. Also, the final argument to
- @convertOnly@ is not given. However, the type signature of @l33t@ tells the
- whole story:
-
-< l33t :: String -> String
-
- That is, @l33t@ takes a string and produces a string. It is a ``constant'', in
- the sense that @l33t@ always returns a value that is a function which takes a
- string and produces a string. @l33t@ returns a ``curried'' form of
- @convertOnly@, where only two of its three arguments have been supplied.
-
- This can be taken further. Say we want to write a function which only changes
- upper case letters. We know the test to apply, @isUpper@, but we don't want to
- specify the conversion. That function can be written as:
-
-> convertUpper = convertOnly isUpper
-
- which has the type signature:
-
-< convertUpper :: (Char -> Char)
-<   -> String -> String
-
- That is, @convertUpper@ can take two arguments. The first is the conversion
- function which converts individual characters and the second is the string to
- be converted.
-
- A curried form of any function which takes multiple arguments can be created.
- One way to think of this is that each ``arrow'' in the function's signature
- represents a new function which can be created by supplying one more argument.
-
- \sshd{Sections}\label{sections}
-
- Operators are functions, and they can be curried like any other. For example, a
- curried version of ``@+@'' can be written as:
-
-< add10 = (+) 10
-
- However, this can be unwieldy and hard to read. ``Sections'' are curried
- operators, using parentheses. Here is @add10@ using sections:
-
-> add10 = (10 +)
-
- The supplied argument can be on the right or left, which indicates what
- position it should take. This is important for operations such as
- concatenation:
-
-> onLeft str = (++ str)
-> onRight str = (str ++)
-
- Which produces quite different results:
-
-< > onLeft "foo" "bar"
-< "barfoo"
-< > onRight "foo" "bar"
-< "foobar"
-
-\shd{``Updating'' values and record syntax}\label{updating}
-
-  Haskell is a pure language and, as such, has no mutable state. That is, once a
-  value is set it never changes. ``Updating'' is really a copy operation, with
-  new values in the fields that ``changed.'' For example, using the @Color@ type
-  defined earlier, we can write a function that sets the @green@ field to zero
-  easily:
-
-> noGreen1 (C r _ b) = C r 0 b
-
-  The above is a bit verbose and can be rewriten using record syntax. This kind
-  of ``update'' only sets values for the field(s) specified and copies the rest:
-
-> noGreen2 c = c { green = 0 }
-
-  Here we capture the @Color@ value in @c@ and return a new @Color@ value.  That
-  value happens to have the same value for @red@ and @blue@ as @c@ and it's
-  @green@ component is 0. We can combine this with pattern matching to set the
-  @green@ and @blue@ fields to equal the @red@ field:
-
-> makeGrey c@(C { red = r }) =
->   c { green = r, blue = r }
-
-  Notice we must use argument capture (``|c@|'') to get the @Color@ value and
-  pattern matching with record syntax (``|C { red = r}|'') to get the inner
-  @red@ field.
-
-\shd{Anonymous Functions}\label{anonymous-functions}
-
-  An anonymous function (i.e., a \emph{lambda expression} or \emph{lambda} for
-  short), is a function without a name. They can be defined at any time like so:
-
-< \c -> (c, c)
-
-  which defines a function which takes an argument and returns a tuple
-  containing that argument in both positions. They are useful for simple
-  functions which don't need a name. The following determines if a string has
-  mixed case (or is all whitespace):
-
-> mixedCase str =
->   all (\c -> isSpace c ||
->              isLower c ||
->              isUpper c) str
-
-  Of course, lambdas can be the returned from functions too. This classic
-  returns a function which will then multiply its argument by the one originally
-  given:
-
-> multBy n = \m -> n * m
-
-  For example:
-
-< > let mult10 = multBy 10
-< > mult10 10
-< 100
-
-\shd{Type Signatures}\label{type-signatures}
-
-  Haskell supports full type inference, meaning in most cases no types have to
-  be written down. Type signatures are still useful for at least two reasons.
-
-  \begin{description}
-  \item{\emph{Documentation}}---Even if the compiler can figure out the types
-  of your functions, other programmers or even yourself might not be able to
-  later. Writing the type signatures on all top-level functions is considered
-  very good form.
-
-  \item{\emph{Specialization}}---Typeclasses allow functions with overloading.
-  For example, a function to negate any list of numbers has the signature:
-
-< negateAll :: Num a => [a] -> [a]
-
-  However, for efficiency or other reasons you may only want to allow @Int@
-  types. You would accomplish that with a type signature:
-
-< negateAll :: [Int] -> [Int]
-  \end{description}
-
-  Type signatures can appear on top-level functions and nested @let@ or @where@
-  definitions. Generally this is useful for documentation, although in some
-  cases they are needed to prevent polymorphism. A type signature is first the
-  name of the item which will be typed, followed by a @::@, followed by the
-  types. An example of this has already been seen above.
-
-  Type signatures do not need to appear directly above their implementation.
-  They can be specified anywhere in the containing module (yes, even below!).
-  Multiple items with the same signature can also be defined together:
-
-> pos, neg :: Int -> Int
-
-< ...
-
-> pos x | x < 0 = negate x
->       | otherwise = x
->
-> neg y | y > 0 = negate y
->       | otherwise = y
-
-  \sshd{Type Annotations}\label{type-annotations}
-
-  Sometimes Haskell cannot determine what type is meant. The classic
-  demonstration of this is the so-called ``@show . read@'' problem:
-
-< canParseInt x = show (read x)
-
-  Haskell cannot compile that function because it does not know the type of @x@.
-  We must limit the type through an annotation:
-
-> canParseInt x = show ((read x) :: Int)
-
-  Annotations have the same syntax as type signatures, but may adorn any
-  expression.
-
-\shd{Unit}\label{unit}
-
-  @()@ -- ``unit'' type and ``unit'' value. The value and type that represents
-  no useful information.
-
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Dave Bayer, Elisa Firth, Cale Gibbard, Stephen Hicks, Kurt
-  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter,
-  Lanny Ripple, Markus Roberts, Holger Siegel, Leif Warner, and Jeff
-  Zaroyko.
+  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Cale Gibbard,
+  Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
+  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Adam
+  Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 1.11. The source can be found at GitHub
+  This is version 2.0. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
