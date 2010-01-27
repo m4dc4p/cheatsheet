@@ -261,7 +261,7 @@ interpreter to play with code samples shown.
   \sshd{Pattern Matching}\label{pattern-matching}
 
   Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
-  the values of arguments. Here, the the @agree@ function has four separate
+  the values of arguments. Here, the @agree@ function has four separate
   cases:
 
 > -- Matches when the string "y" is given.
@@ -668,7 +668,7 @@ interpreter to play with code samples shown.
 
 > noGreen1 (C r _ b) = C r 0 b
 
-  The above is a bit verbose and can be rewriten using record syntax. This kind
+  The above is a bit verbose and can be rewritten using record syntax. This kind
   of ``update'' only sets values for the field(s) specified and copies the rest:
 
 > noGreen2 c = c { green = 0 }
@@ -1234,7 +1234,7 @@ of the @Maybe@ type:
 
   \sshd{Deconstruction}\label{deconstruction}
 
-  The left-hand side of a @let@ definition can also destructure its argument, in
+  The left-hand side of a @let@ definition can also destruct its argument, in
   case sub-components are to be accessed. This definition would extract the
   first three characters from a string
 
@@ -1521,14 +1521,14 @@ of the @Maybe@ type:
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Cale Gibbard,
-  Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
-  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Adam
-  Vogt, Leif Warner, and Jeff Zaroyko.
+  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
+  Gianforcaro, Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Johan
+  Kiviniemi, Adrian Neumann, Barak Pearlmutter, Lanny Ripple, Markus
+  Roberts, Holger Siegel, Adam Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.0. The source can be found at GitHub
+  This is version 2.1. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
