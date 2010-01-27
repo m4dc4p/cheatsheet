@@ -261,7 +261,7 @@ interpreter to play with code samples shown.
   \sshd{Pattern Matching}\label{pattern-matching}
 
   Multiple ``clauses'' of a function can be defined by ``pattern-matching'' on
-  the values of arguments. Here, the the @agree@ function has four separate
+  the values of arguments. Here, the @agree@ function has four separate
   cases:
 
 > -- Matches when the string "y" is given.
@@ -668,7 +668,7 @@ interpreter to play with code samples shown.
 
 > noGreen1 (C r _ b) = C r 0 b
 
-  The above is a bit verbose and can be rewriten using record syntax. This kind
+  The above is a bit verbose and can be rewritten using record syntax. This kind
   of ``update'' only sets values for the field(s) specified and copies the rest:
 
 > noGreen2 c = c { green = 0 }
@@ -1234,7 +1234,7 @@ of the @Maybe@ type:
 
   \sshd{Deconstruction}\label{deconstruction}
 
-  The left-hand side of a @let@ definition can also destructure its argument, in
+  The left-hand side of a @let@ definition can also destruct its argument, in
   case sub-components are to be accessed. This definition would extract the
   first three characters from a string
 
