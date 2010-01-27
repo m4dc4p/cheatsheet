@@ -1521,14 +1521,14 @@ of the @Maybe@ type:
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Cale Gibbard,
-  Stephen Hicks, Kurt Hutchinson, Johan Kiviniemi, Adrian Neumann,
-  Barak Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Adam
-  Vogt, Leif Warner, and Jeff Zaroyko.
+  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
+  Gianforcaro, Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Johan
+  Kiviniemi, Adrian Neumann, Barak Pearlmutter, Lanny Ripple, Markus
+  Roberts, Holger Siegel, Adam Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.0. The source can be found at GitHub
+  This is version 2.1. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
