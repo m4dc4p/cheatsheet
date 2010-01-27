@@ -1234,7 +1234,7 @@ of the @Maybe@ type:
 
   \sshd{Deconstruction}\label{deconstruction}
 
-  The left-hand side of a @let@ definition can also destruct its argument, in
+  The left-hand side of a @let@ definition can also destructure its argument, in
   case sub-components are to be accessed. This definition would extract the
   first three characters from a string
 
@@ -1528,7 +1528,7 @@ of the @Maybe@ type:
 
 \hd{Version}\label{version}
 
-  This is version 2.1. The source can be found at GitHub
+  This is version 2.2. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
