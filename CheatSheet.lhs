@@ -1072,7 +1072,7 @@ of the @Maybe@ type:
 
   The @do@ keyword indicates that the code to follow will be in a \emph{monadic}
   context. Statements are separated by newlines, assignment is indicated by
-  @<-@, and a @let@ form is introduce which does not require the @in@ keyword.
+  @<-@, and a @let@ form is introduced which does not require the @in@ keyword.
 
   \sshd{If and IO}\label{if-io}
 
@@ -1531,7 +1531,7 @@ of the @Maybe@ type:
 
 \hd{Version}\label{version}
 
-  This is version 2.3. The source can be found at GitHub
+  This is version 2.4. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
