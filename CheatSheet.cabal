@@ -1,7 +1,7 @@
 Name:           CheatSheet
 License:        BSD3
 License-File:   LICENSE
-Version:        2.3
+Version:        2.4
 Homepage:       http://cheatsheet.codeslower.com
 Maintainer:     Justin Bailey <jgbailey@codeslower.com>
 Author:     Justin Bailey <jgbailey@codeslower.com>
@@ -22,10 +22,10 @@ Executable cheatsheet
   Build-Depends: base >= 3 && < 5, containers, directory
 
 Source-repository head
- Type: git
+ type: git
  location: git://github.com/m4dc4p/cheatsheet.git
 
 Source-repository this
- Type: git
+ type: git
  location: git://github.com/m4dc4p/cheatsheet.git
- tag: v2.3  
+ tag: v2.4
