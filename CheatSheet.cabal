@@ -1,12 +1,12 @@
 Name:           CheatSheet
 License:        BSD3
 License-File:   LICENSE
-Version:        2.2
+Version:        2.3
 Homepage:       http://cheatsheet.codeslower.com
 Maintainer:     Justin Bailey <jgbailey@codeslower.com>
 Author:     Justin Bailey <jgbailey@codeslower.com>
 Category:       Help
-Build-Depends:  base >=3 && < 5, containers, directory
+Cabal-Version: >= 1.6
 Build-type: Simple
 Synopsis:       A Haskell cheat sheet in PDF and literate formats.
 Description:
@@ -16,7 +16,16 @@ Description:
 Data-files: CheatSheet.pdf, CheatSheet.lhs
 Extra-Source-Files: CheatSheet.lhs, README
 
-Executable: cheatsheet
-Main-Is: Main.lhs
-Hs-Source-Dirs: . 
+Executable cheatsheet
+  Main-Is: Main.lhs
+  Hs-Source-Dirs: . 
+  Build-Depends: base >= 3 && < 5, containers, directory
 
+Source-repository head
+ Type: git
+ location: git://github.com/m4dc4p/cheatsheet.git
+
+Source-repository this
+ Type: git
+ location: git://github.com/m4dc4p/cheatsheet.git
+ tag: v2.3  

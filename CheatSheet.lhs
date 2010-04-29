@@ -15,11 +15,12 @@
 
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
+% \usepackage{setspace}
 \hypersetup{colorlinks}
 
 \pagestyle{fancy}
 \fancyhf{}
-\lfoot{\copyright\ 2009 Justin Bailey.}
+\lfoot{\copyright\ 2010 Justin Bailey.}
 \cfoot{\thepage}
 \rfoot{\href{mailto:jgbailey@@codeslower.com}{\tt jgbailey@@codeslower.com}}
 \renewcommand\footrulewidth{0.4pt}
@@ -38,6 +39,7 @@
 \setlength{\columnsep}{18.0pt}
 \setlength{\columnseprule}{0.4pt}
 \begin{document}
+% \doublespacing
 \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
 
@@ -1022,20 +1024,6 @@ of the @Maybe@ type:
   Finally, as explained elsewhere, these names can be used for pattern matching,
   argument capture and ``updating.''
 
-  \sshd{Class Constraints}\label{class-constraints}
-
-  Data types can be declared with class constraints on the type variables, but
-  this practice is discouraged. It is better to hide the
-  ``raw'' data constructors using the module system and instead export ``smart''
-  constructors which apply appropriate constraints. In any case, the syntax used
-  is:
-
-> data (Num a) => SomeNumber a = Two a a
->   | Three a a a
-
-  This declares a type @SomeNumber@ which has one type variable argument. Valid
-  types are those in the @Num@ class.
-
   \sshd{Deriving}\label{deriving}
 
   Many types have common operations which are tedious to define yet necessary,
@@ -1059,7 +1047,21 @@ of the @Maybe@ type:
 >   deriving (Read, Show)
 
   It is a syntax error to specify @deriving@ for any other classes besides the
-  six given above.
+  seven given above.
+
+  \sshd{Class Constraints}\label{class-constraints}
+
+  Data types can be declared with class constraints on the type variables, but
+  this practice is discouraged. It is better to hide the
+  ``raw'' data constructors using the module system and instead export ``smart''
+  constructors which apply appropriate constraints. In any case, the syntax used
+  is:
+
+> data (Num a) => SomeNumber a = Two a a
+>   | Three a a a
+
+  This declares a type @SomeNumber@ which has one type variable argument. Valid
+  types are those in the @Num@ class.
 
 \shd{Deriving}
 
@@ -1522,13 +1524,14 @@ of the @Maybe@ type:
 
   My thanks to those who contributed patches and useful suggestions:
   Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
-  Gianforcaro, Cale Gibbard, Stephen Hicks, Kurt Hutchinson, Johan
-  Kiviniemi, Adrian Neumann, Barak Pearlmutter, Lanny Ripple, Markus
-  Roberts, Holger Siegel, Adam Vogt, Leif Warner, and Jeff Zaroyko.
+  Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
+  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter,
+  Lanny Ripple, Markus Roberts, Holger Siegel, Adam Vogt, Leif Warner,
+  and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.2. The source can be found at GitHub
+  This is version 2.3. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
