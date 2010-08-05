@@ -1295,7 +1295,7 @@ of the @Maybe@ type:
 
 < import Text.Read (readParen, lex)
 
-  Data types can imported in a number of ways. We can just import the type and
+  Data types can be imported in a number of ways. We can just import the type and
   no constructors:
 
 < import Text.Read (Lexeme)
@@ -1525,13 +1525,13 @@ of the @Maybe@ type:
   My thanks to those who contributed patches and useful suggestions:
   Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
   Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
-  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter,
-  Lanny Ripple, Markus Roberts, Holger Siegel, Adam Vogt, Leif Warner,
-  and Jeff Zaroyko.
+  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter, Lanny
+  Ripple, Markus Roberts, Holger Siegel, Falko Spiller, Adam Vogt, Leif
+  Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.4. The source can be found at GitHub
+  This is version 2.5. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
