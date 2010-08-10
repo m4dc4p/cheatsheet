@@ -146,10 +146,15 @@ interpreter to play with code samples shown.
 
   \sshd{Escape Codes} The following escape codes can be used in characters or strings:
   \begin{compactitem}
-    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline, carriage return, form feed, etc. are supported.
-    \item @\72@, @\x48@, @\o110@ -- A character with the value 72 in decimal, hex and octal, respectively.
-    \item @\&@ -- The ``null'' escape character, it is used so numeric escape codes can appear next to numeric literals. Equivalent to ``'' and therefore cannot be used in character literals.
-    \todo{Control characters, ascii codes such as NUL}
+    \item @\n@, @\r@, @\f@, etc. -- The standard codes for newline,
+      carriage return, form feed, etc. are supported.
+    \item @\72@, @\x48@, @\o110@ -- A character with the value 72 in
+      decimal, hex and octal, respectively.
+    \item @\&@ -- A ``null'' escape character which allows numeric
+      escape codes next to numeric literals. For example, @\x2C4@ is
+      $\wedge$ (in Unicode) while @\x2C\&4@ is @,4@. This sequence
+      cannot be used in character literals.  \todo{Control characters,
+        ascii codes such as NUL}
   \end{compactitem}
 
 
@@ -1531,7 +1536,7 @@ of the @Maybe@ type:
 
 \hd{Version}\label{version}
 
-  This is version 2.5. The source can be found at GitHub
+  This is version 2.6. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
