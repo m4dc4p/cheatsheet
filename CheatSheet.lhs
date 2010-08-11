@@ -1536,7 +1536,7 @@ of the @Maybe@ type:
 
 \hd{Version}\label{version}
 
-  This is version 2.6. The source can be found at GitHub
+  This is version 2.7. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
