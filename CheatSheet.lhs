@@ -1486,22 +1486,8 @@ of the @Maybe@ type:
 
   can be used on values with the type @FirstName@ or @LastName@ just as easily:
 
-> lName (Person f l ) =
+> lName (Person f l) =
 >   Person (lower f) (lower l)
-
-  Because @type@ is just a synonym, it cannot declare multiple constructors the
-  way @data@ can. Type variables can be used, but there cannot be more than the
-  type variables declared with the original type. That means a synonym like the
-  following is possible:
-
-< type NotSure a = Maybe a
-
-  but this not:
-
-< type NotSure a b = Maybe a
-
-  Note that \emph{fewer} type variables can be used, which is useful in certain
-  instances.
 
 \shd{Where}\label{where}
 
@@ -1528,15 +1514,15 @@ of the @Maybe@ type:
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-  Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
-  Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
-  Hutchinson, Johan Kiviniemi, Adrian Neumann, Barak Pearlmutter, Lanny
-  Ripple, Markus Roberts, Holger Siegel, Falko Spiller, Adam Vogt, Leif
-  Warner, and Jeff Zaroyko.
+Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
+Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
+Hutchinson, Johan Kiviniemi, Patrik Jansson, Adrian Neumann, Barak
+Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Falko
+Spiller, Adam Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.7. The source can be found at GitHub
+  This is version 2.8. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
