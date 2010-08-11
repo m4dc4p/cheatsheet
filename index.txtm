@@ -1,4 +1,20 @@
 % The Haskell Cheatsheet
+% Justin Bailey
+% December 27, 2009
+<div id="wrapper">
+<div id="masthead" class="fix" style="width: 100%">
+<h1 class="sans"><a href="http://blog.codeslower.com" class="title">codeslower.com</a> <em>Savor Your Code.</em></h1>
+</div>
+<div id="mid" class="fix">
+<div id="mainCol" class="fix">
+<div id="article" class="post">
+
+<div style="text-align: center">
+## The Haskell Cheatsheet
+**Justin Bailey** \<<tt>jgbailey@codeslower.com</tt>\>
+</div>
+
+<div id="blogbody" class="entry">
 
 Learning Haskell is not easy. Besides the syntax, concepts, and
 advanced types, there is a real lack of succinct, accessible
@@ -6,7 +22,7 @@ references. As I learned Haskell I frequently wanted a quick reference
 for syntax, keywords and other language elements. [The Haskell Report](http://haskell.org/onlinereport),
 while very thorough, wasn't quite it. 
 
-For that reason I've created [this cheatsheet](/static/CheatSheet.pdf). It's intended for
+For that reason I've created [this cheatsheet](CheatSheet.pdf). It's intended for
 beginning to intermediate Haskell programmers to use as a
 quick-reference guide for syntax, keywords or other language
 issues. You can obtain it in three different ways:
@@ -22,7 +38,32 @@ The guide itself is written as a "literate" Haskell file, meaning it
 is directly executable. That file is available when using the latter
 two options above.
 
-Feedback, comments and patches are welcome. Comment here or send me an
-email (<tt>jgbailey@codeslower.com</tt>). The
-source is hosted at [github.com](http://gitub.com) and patches can be
-submitted to <tt>git://github.com/m4dc4p/cheatsheet.git</tt>.
+The source is hosted at
+[http://github.com/m4dc4p/cheatsheet/tree/master](http://github.com/m4dc4p/cheatsheet/tree/master)
+and can be cloned from
+<tt>git://github.com/m4dc4p/cheatsheet.git</tt>.
+
+<h1>¿Usted habla español?</h1>
+
+Jaime Soffer was kind enough to translate the Haskell Cheatsheet into Spanish! Just download
+[CheatSheetEs.pdf](http://cloud.github.com/downloads/jsoffer/cheatsheet/CheatSheetEs.pdf) from his
+[GitHub repository](http://github.com/jsoffer/cheatsheet/downloads).
+
+<h1>Anata ha Nihongo wo hanashimasuka?</h1>
+
+Yuji Ichikawa has translated the Haskell Cheatsheet into Japanese. Download it now: [CheatSheet-ja.pdf](http://www.h3.dion.ne.jp/~y.ich/CheatSheet-ja.pdf).
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-81888-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
