@@ -1,1 +1,0 @@
-pandoc -r markdown -t html -o index.html -S "index.txtm"
