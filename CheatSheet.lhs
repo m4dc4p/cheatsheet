@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass{article}
 %include lhs2TeX.fmt
 \usepackage[T1]{fontenc}
 \usepackage[sc]{mathpazo}
@@ -7,7 +7,7 @@
 
 \usepackage{multicol}
 \usepackage{float}
-\usepackage[landscape, top=0.2in, bottom=1in, left=0.2in, right=0.2in, dvips]{geometry}
+\usepackage[top=0.25in, paperwidth=3.5in, paperheight=4in, bottom=0.25in, left=0.25in, right=0.25in, dvips]{geometry}
 \usepackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{paralist}
@@ -36,11 +36,11 @@
 \newcommand{\hd}[1]{\section*{\textsf{#1}}}
 \newcommand{\shd}[1]{\subsection*{\textsf{#1}}}
 \newcommand{\sshd}[1]{\subsubsection*{\textsf{#1}}}
-\setlength{\columnsep}{18.0pt}
-\setlength{\columnseprule}{0.4pt}
+%\setlength{\columnsep}{18.0pt}
+%\setlength{\columnseprule}{0.4pt}
 \begin{document}
 % \doublespacing
-\begin{multicols}{3}
+% \begin{multicols}{3}
 \section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
 
 This cheat sheet lays out the fundamental elements of the Haskell language:
@@ -1529,7 +1529,7 @@ Spiller, Adam Vogt, Leif Warner, and Jeff Zaroyko.
   (\url{http://blog.codeslower.com/}) for other projects and writings.
 
 \todos
-\end{multicols}
+%\end{multicols}
 \end{document}
 
 % vim:set tw=80:
