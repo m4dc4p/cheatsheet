@@ -25,7 +25,7 @@ while very thorough, wasn't quite it.
 For that reason I've created [this cheatsheet](CheatSheet.pdf). It's intended for
 beginning to intermediate Haskell programmers to use as a
 quick-reference guide for syntax, keywords or other language
-issues. You can obtain it in three different ways:
+issues. You can obtain it in four different ways:
 
   - Download directly in PDF format: [CheatSheet.pdf](CheatSheet.pdf)
   - As a [Haskell package on HackageDB](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/CheatSheet). 
@@ -33,6 +33,7 @@ issues. You can obtain it in three different ways:
   - Using cabal install with "<tt>cabal install cheatsheet</tt>". Afterwards,
     run the "<tt>cheatsheet</tt>" program and it will tell you where the PDF
     is located.
+  - <a href="http://www.amazon.com/gp/product/B0040JHS7U/ref=as_li_tf_tl?ie=UTF8&tag=thehaskchea-20&linkCode=as2&camp=217145&creative=399349&creativeASIN=B0040JHS7U">The Haskell Cheatsheet</a><img src="http://www.assoc-amazon.com/e/ir?t=thehaskchea-20&l=as2&o=1&a=B0040JHS7U&camp=217145&creative=399349" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> from Amazon.com, formatted especially for the Kindle eReader.
 
 The guide itself is written as a "literate" Haskell file, meaning it
 is directly executable. That file is available when using the latter
@@ -67,3 +68,6 @@ try {
 var pageTracker = _gat._getTracker("UA-81888-3");
 pageTracker._trackPageview();
 } catch(err) {}</script>
+<script type="text/javascript" src="http://www.assoc-amazon.com/s/link-enhancer?tag=thehaskchea-20&o=1">
+</script>
+
