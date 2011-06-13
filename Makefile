@@ -39,6 +39,7 @@ endef
 %.pdf: %.tex
 	$(call run-while-needed,$(pdflatex))
 
+.SECONDARY: CheatSheet.tex
 .PHONY: clean
 clean:
 	$(RM) $(addprefix CheatSheet,$(cleansuffix))
