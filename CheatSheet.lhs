@@ -7,11 +7,10 @@
 
 \usepackage{multicol}
 \usepackage{float}
-\usepackage[top=0.25in, paperwidth=3.5in, paperheight=4in, bottom=0.25in, left=0.25in, right=0.25in, dvips]{geometry}
+\usepackage[top=0.25in, paperwidth=2.85in, paperheight=4in, bottom=0.25in, left=0.25in, right=0.25in]{geometry}
 \usepackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{paralist}
-\usepackage[hide]{todo}
 
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
@@ -39,10 +38,23 @@
 %\setlength{\columnsep}{18.0pt}
 %\setlength{\columnseprule}{0.4pt}
 \begin{document}
+{\parindent 0in \sf\Huge
+The \hfil
+
+Haskell \hfil
+
+Cheat~Sheet \hfil
+
+\normalsize\vfill
+Justin Bailey \hfil\break
+\href{mailto:jgbailey@@codeslower.com}{\tt jgbailey@@codeslower.com}\hfil\break
+\copyright\ 2011}
+\thispagestyle{empty}
+\clearpage
+
 % \doublespacing
 % \begin{multicols}{3}
-\section*{\textsf{\LARGE Haskell Cheat Sheet\normalsize}}\label{preamble}
-
+\section*{Introduction}\label{preamble}
 This cheat sheet lays out the fundamental elements of the Haskell language:
 syntax, keywords and other elements. It is presented as both an executable
 Haskell file and a printable document. Load the source into your favorite
@@ -153,8 +165,7 @@ interpreter to play with code samples shown.
     \item @\&@ -- A ``null'' escape character which allows numeric
       escape codes next to numeric literals. For example, @\x2C4@ is
       $\wedge$ (in Unicode) while @\x2C\&4@ is @,4@. This sequence
-      cannot be used in character literals.  \todo{Control characters,
-        ascii codes such as NUL}
+      cannot be used in character literals.
   \end{compactitem}
 
 
@@ -1424,8 +1435,6 @@ of the @Maybe@ type:
 > newtype Work = W String
 > data Phone = Phone Home Work
 
-\todo[use lowerName?]{lowerName function from above?}
-
   As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
   just @String@ values. The typechecker treats them as entirely new types. That
   means our @lowerName@ function from above would not compile. The following
@@ -1528,7 +1537,6 @@ Spiller, Adam Vogt, Leif Warner, and Jeff Zaroyko.
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
   (\url{http://blog.codeslower.com/}) for other projects and writings.
 
-\todos
 %\end{multicols}
 \end{document}
 
