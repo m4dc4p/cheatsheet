@@ -23,10 +23,11 @@ function initHaskellButton(item,clicked_fn) {
 	  popupHeight = 70,
 	  item_loc = item.offset(),
     item_dim = { h: item.height(), w: item.width() },
-    itemDetect = $('<span></span>'),
+    itemDetect = $('<div></div>'),
+    frozen,
     lilrobot = $('<div></div>');
 
-	lilrobot.css({ "z-index": 100, 
+	lilrobot.css({ "z-index": "auto", 
                  "background-position": "0px -540px", 
                  "position": "absolute", 
                  "background-image": "url(codeslower_sprites_sm.png)", 
@@ -35,12 +36,13 @@ function initHaskellButton(item,clicked_fn) {
                  "background-repeat": "no-repeat" });
 
   itemDetect.css({
-    "z-index": 100,
     "position": "absolute",
     "left": item_loc.left - detectDist,
     "top": item_loc.top - detectDist,
     "width": item_dim.w + detectDist * 2,
-    "height": item_dim.h + detectDist * 2
+    "height": item_dim.h + detectDist * 2,
+    "display": "inline",
+    "visibility": "visible"
   });
 
 	itemDetect.mousemove(function(e) {
@@ -52,8 +54,16 @@ function initHaskellButton(item,clicked_fn) {
 			var distX = Math.abs(e.pageX - item_center.x) - (item_dim.w/2);
 			var dist = (distY < distX ? distX : distY);
 
-			if(distX < detectDist && distY < detectDist)
-				lilrobot.css("background-position", "0px " + ((dist/detectDist)*popupHeight) + "px");
+			if(distX < detectDist && distY < detectDist) {
+        if(e.pageY >= item_loc.top && e.pageY <= (item_loc.top + item_dim.h) &&
+           e.pageX >= item_loc.left && e.pageX <= (item_loc.left + item_dim.w)) {
+
+          itemDetect.css({"visibility":"hidden"});
+
+        }
+        else
+				  lilrobot.css("background-position", "0px " + ((dist/detectDist)*popupHeight) + "px");
+      }
 			else
 				lilrobot.css("background-position", "0px -540px");
 		}
@@ -62,6 +72,11 @@ function initHaskellButton(item,clicked_fn) {
   // Always hide the sprite when the mouse leaves the bounding box.
   itemDetect.mouseleave(function(e) {
 		lilrobot.css("background-position", "0px -540px");
+    console.log("mouseleave");
+  });
+  
+  item.mouseleave(function(e) {
+    itemDetect.css({"visibility":"visible"});
   });
 
 	item.click(function(e) {
