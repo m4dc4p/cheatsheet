@@ -11,7 +11,6 @@
 \usepackage{verbatim}
 \usepackage{fancyhdr}
 \usepackage{paralist}
-\usepackage[hide]{todo}
 
 \usepackage{hyperref}
 \usepackage[all]{hypcap} % Must be after hyperref
@@ -50,7 +49,7 @@ interpreter to play with code samples shown.
 
 \begin{comment}
 
-> {-# LANGUAGE MultiParamTypeClasses #-}
+> {-# LANGUAGE MultiParamTypeClasses,NPlusKPatterns, DatatypeContexts #-}
 >
 > module CheatSheet where
 >
@@ -153,8 +152,7 @@ interpreter to play with code samples shown.
     \item @\&@ -- A ``null'' escape character which allows numeric
       escape codes next to numeric literals. For example, @\x2C4@ is
       $\wedge$ (in Unicode) while @\x2C\&4@ is @,4@. This sequence
-      cannot be used in character literals.  \todo{Control characters,
-        ascii codes such as NUL}
+      cannot be used in character literals.
   \end{compactitem}
 
 
@@ -1226,18 +1224,22 @@ of the @Maybe@ type:
 >   let mult n = n * x
 >   in map mult [1..10]
 
-  @let@ ``functions'' with no arguments are actually constants and, once
-  evaluated, will not evaluate again. This is useful for capturing common
-  portions of your function and re-using them. Here is a silly example which
-  gives the sum of a list of numbers, their average, and their median:
+  @let@ ``functions'' with no arguments are actually constants and,
+  once evaluated, will not evaluate again for that invocation of the
+  outer function. This is useful for
+  capturing common portions of your function and re-using them. Here
+  is a silly example which gives the sum of a list of numbers and
+  their average.  The @numbers@ definition captures the list of
+  numbers from @1@ to @m@, and will only be evaulated once per
+  invocation of @listStats@; similarly, @total@ and @avg@ are only
+  evaluated once per invocation:
 
 > listStats m =
->   let numbers = [1,3 .. m]
+>   let numbers = [1 .. m]
 >       total = sum numbers
->       mid = head (drop (m `div` 2)
->                        numbers)
+>       avg = total / m
 >   in "total: " ++ show total ++
->      ", mid: " ++ show mid
+>      ", avg: " ++ show avg
 
   \sshd{Deconstruction}\label{deconstruction}
 
@@ -1424,8 +1426,6 @@ of the @Maybe@ type:
 > newtype Work = W String
 > data Phone = Phone Home Work
 
-\todo[use lowerName?]{lowerName function from above?}
-
   As opposed to @type@, the @H@ and @W@ ``values'' on @Phone@ are \emph{not}
   just @String@ values. The typechecker treats them as entirely new types. That
   means our @lowerName@ function from above would not compile. The following
@@ -1514,7 +1514,7 @@ of the @Maybe@ type:
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-Dave Bayer, Paul Butler, Elisa Firth, Marc Fontaine, Brian
+Dave Bayer, Evgenij Belikov, Paul Butler, Elisa Firth, Marc Fontaine, Brian
 Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
 Hutchinson, Johan Kiviniemi, Patrik Jansson, Adrian Neumann, Barak
 Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Falko
@@ -1522,13 +1522,12 @@ Spiller, Adam Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
-  This is version 2.8. The source can be found at GitHub
+  This is version 2.9. The source can be found at GitHub
   (\url{http://github.com/m4dc4p/cheatsheet}). The latest released
   version of the PDF can be downloaded from
   \url{http://cheatsheet.codeslower.com}.  Visit CodeSlower.com
   (\url{http://blog.codeslower.com/}) for other projects and writings.
 
-\todos
 \end{multicols}
 \end{document}
 
