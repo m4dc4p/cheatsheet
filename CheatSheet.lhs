@@ -1081,7 +1081,7 @@ of the @Maybe@ type:
 
   @if@ can be tricky when used with IO. Conceptually it is no different from an
   @if@ in any other context, but intuitively it is hard to develop. Consider the
-  function @doesFileExists@ from @System.Directory@:
+  function @doesFileExist@ from @System.Directory@:
 
 < doesFileExist :: FilePath -> IO Bool
 
