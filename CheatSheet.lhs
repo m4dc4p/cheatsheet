@@ -1514,7 +1514,7 @@ of the @Maybe@ type:
 \hd{Contributors}\label{contributors}
 
   My thanks to those who contributed patches and useful suggestions:
-Dave Bayer, Evgenij Belikov, Paul Butler, Elisa Firth, Marc Fontaine, Brian
+Dave Bayer, Evgenij Belikov, Paul Butler, Jonas Devlieghere, Elisa Firth, Marc Fontaine, Brian
 Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
 Hutchinson, Johan Kiviniemi, Patrik Jansson, Adrian Neumann, Barak
 Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Falko
