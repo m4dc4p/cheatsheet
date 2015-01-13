@@ -300,7 +300,7 @@ interpreter to play with code samples shown.
 > toLowerStr [] = []
 > toLowerStr str = map toLower str
 
-  Note that @str@ above is similer to @_@ in that it will match anything; the
+  Note that @str@ above is similar to @_@ in that it will match anything; the
   only difference is that the value matched is also given a name.
 
   \sshd{{\ensuremath $n + k$} Patterns}\label{plus-patterns}
