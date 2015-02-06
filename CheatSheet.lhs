@@ -942,7 +942,7 @@ of the @Maybe@ type:
 
 \end{comment}
 
-  @MyType@ is the type's \emph{name}. @MyValue1@ and @MyValue@ are \emph{values}
+  @MyType@ is the type's \emph{name}. @MyValue1@ and @MyValue2@ are \emph{values}
   of the type and are called \emph{constructors}. Multiple constructors are
   separated with the `@|@' character. Note that type and constructor names
   \emph{must} start with a capital letter. It is a syntax error otherwise.
@@ -1518,7 +1518,7 @@ Dave Bayer, Evgenij Belikov, Paul Butler, Jonas Devlieghere, Elisa Firth, Marc F
 Gianforcaro, Cale Gibbard, Andrew Harris, Stephen Hicks, Kurt
 Hutchinson, Johan Kiviniemi, Patrik Jansson, Adrian Neumann, Barak
 Pearlmutter, Lanny Ripple, Markus Roberts, Holger Siegel, Falko
-Spiller, Adam Vogt, Leif Warner, and Jeff Zaroyko.
+Spiller, Emiel van de Laar, Adam Vogt, Leif Warner, and Jeff Zaroyko.
 
 \hd{Version}\label{version}
 
